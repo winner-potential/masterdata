@@ -1,0 +1,23 @@
+<mat-form-field class="metric-destination-full-width">
+  <input matInput type="text" placeholder="Alias" name="alias" [(ngModel)]="alias" />
+</mat-form-field>
+<mat-form-field class="metric-destination-full-width">
+  <input matInput type="text" placeholder="Reference Document" name="document" [(ngModel)]="document" (input)="handleDocument($event)"
+    [matAutocomplete]="auto">
+  <mat-autocomplete #auto="matAutocomplete" [displayWith]="extractDisplayValue" (optionSelected)="handleSelection($event)">
+    <mat-option *ngFor="let d of documents" [value]="d">
+      {{d.name}}
+      <span *ngIf="d.description" class="note"> {{d.description}}</span>
+    </mat-option>
+  </mat-autocomplete>
+</mat-form-field>
+<mat-form-field *ngIf="document && document._id && selectedDocument" class="metric-destination-full-width">
+  <mat-select placeholder="Select Metric" name="metric" [(ngModel)]="link">
+    <ng-container *ngFor="let m of selectedDocument.metrics">
+      <mat-option *ngIf="m.identifier == identifier" [value]="m._id">
+        {{m.alias ? m.alias : (metricTemplates[m.identifier].alias ? metricTemplates[m.identifier].alias : metricTemplates[m.identifier].name)}}
+        <span *ngIf="m.alias || metricTemplates[m.identifier].alias" class="note">({{metricTemplates[m.identifier].name}})</span>
+      </mat-option>
+    </ng-container>
+  </mat-select>
+</mat-form-field>

@@ -1,0 +1,95 @@
+<form class="document-form" *ngIf="!saving && !loading">
+  <mat-card class="document-card">
+    <mat-card-title>Document Details</mat-card-title>
+    <mat-card-subtitle>Basics</mat-card-subtitle>
+    <mat-card-content>
+      <mat-form-field class="document-full-width">
+        <input matInput type="text" placeholder="Name" name="name" [(ngModel)]="name" required />
+        <mat-error *ngIf="!name">Missing tag name</mat-error>
+      </mat-form-field>
+      <mat-form-field class="document-full-width">
+        <input matInput type="text" placeholder="Description" name="description" [(ngModel)]="description" />
+      </mat-form-field>
+      <document-input [(ngModel)]="parent" placeholder="Parent" name="parent"></document-input>
+      <mat-form-field *ngIf="documentTemplates.length" class="document-full-width">
+        <mat-select placeholder="Template" name="template" [(ngModel)]="template" (selectionChange)="handleTemplate($event)" required>
+          <mat-option *ngFor="let document of documentTemplates" [value]="document._id">
+            {{document.alias ? document.alias : document.name}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="!template">Missing document template</mat-error>
+      </mat-form-field>
+    </mat-card-content>
+  </mat-card>
+  <mat-card class="document-card" *ngIf="template">
+    <mat-card-header>
+      <div mat-card-avatar>
+        <mat-icon class="mat-icon-rtl-mirror">
+            assignment
+        </mat-icon>
+      </div>
+      <mat-card-title>Attributes</mat-card-title>
+      <mat-card-subtitle>Based on template</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <document-attribute *ngFor="let field of attributes" (data)="handleDataAttribute(field, $event)" [attribute-name]="field.name"
+        [attribute-required]="field.should" [(ngModel)]="values[field.name]" [attribute-type]="field.type" [ngModelOptions]="{standalone: true}"></document-attribute>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-accordion class="document-card" *ngIf="metrics && metrics.length">
+    <mat-expansion-panel *ngFor="let metric of metrics; let index = index">
+      <mat-expansion-panel-header>
+        <mat-panel-title><span>
+          {{metricTemplates[metric.identifier].alias ? metricTemplates[metric.identifier].alias : metricTemplates[metric.identifier].name}}
+          <span *ngIf="metricTemplates[metric.identifier].unit">[{{metricTemplates[metric.identifier].unit}}]</span></span>
+        </mat-panel-title>
+        <mat-panel-description><span>Source Metric
+          <span *ngIf="metricTemplates[metric.identifier].alias">&nbsp;({{metricTemplates[metric.identifier].name}})</span></span>
+          <mat-icon>timeline</mat-icon>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <document-metric [tag-templates]="tagTemplates" [metric-template]="metricTemplates[metric.identifier]" [metric]="metric"></document-metric>
+      <mat-action-row>
+        <button mat-button type="button" (click)="removeMetric(index)">Delete Metric</button>
+      </mat-action-row>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+  <mat-accordion class="document-card" *ngIf="relations && relations.length">
+    <mat-expansion-panel *ngFor="let relation of relations; let index = index">
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{metricTemplates[relation.identifier].alias ? metricTemplates[relation.identifier].alias : metricTemplates[relation.identifier].name}}
+        <span *ngIf="metricTemplates[relation.identifier].unit">[{{metricTemplates[relation.identifier].unit}}]</span>
+        </mat-panel-title>
+        <mat-panel-description>Relation for Metric
+          <span *ngIf="metricTemplates[relation.identifier].alias">&nbsp;({{metricTemplates[relation.identifier].name}})</span>
+          <mat-icon>timeline</mat-icon>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <document-metric-relation [metric-templates]="metricTemplates" [metric]="relation"></document-metric-relation>
+      <mat-action-row>
+        <button mat-button type="button" (click)="removeRelationMetric(index)">Delete Relation</button>
+      </mat-action-row>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+  <mat-card class="buttons">
+    <mat-card-content>
+      <button mat-button type="button" color="primary" (click)="save()">Save</button>
+      <button mat-button type="button" color="warn" *ngIf="id" (click)="delete()">Delete</button>
+    </mat-card-content>
+  </mat-card>
+</form>
+
+<div class="saving-card" *ngIf="saving">
+  <mat-spinner></mat-spinner>
+</div>
+
+<div class="saving-card" *ngIf="loading">
+  <mat-spinner color="accent"></mat-spinner>
+</div>
+
+<button mat-fab type="button" *ngIf="template && usableMetrics.length" class="fab-bottom-right" color="primary" (click)="openDialog()">
+  <mat-icon aria-label="Add entry">timeline</mat-icon>
+</button>

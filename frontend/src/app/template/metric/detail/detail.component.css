@@ -1,0 +1,26 @@
+.metric-template-form {
+    min-width: 150px;
+    max-width: 650px;
+    width: 100%;
+}
+
+.metric-template-card {
+    margin-bottom: 10px;
+}
+
+.metric-template-full-width {
+    width: 100%;
+}
+
+.saving-card mat-spinner {
+    margin: 0 auto;
+}
+
+.metric-template-card .mat-card-avatar {
+    text-align: center;
+    line-height: 40px;
+}
+
+.metric-template-card .mat-card-avatar .mat-icon {
+    vertical-align: middle;
+}

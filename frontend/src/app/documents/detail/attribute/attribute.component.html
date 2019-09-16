@@ -1,0 +1,17 @@
+<mat-form-field class="attribute-full-width" *ngIf="type == 'string' || type == 'number' || type == 'integer'">
+  <input matInput #attribute="ngModel" type="text" [placeholder]="name+(config.required?' *':'')" [(ngModel)]="value" name="attribute"
+    [attribute-check]="config" />
+  <mat-error *ngIf="attribute.invalid && (attribute.dirty || attribute.touched) && attribute.errors.number">Bad number format</mat-error>
+  <mat-error *ngIf="attribute.invalid && (attribute.dirty || attribute.touched) && attribute.errors.integer">Bad integer format</mat-error>
+  <mat-error *ngIf="attribute.invalid && (attribute.dirty || attribute.touched) && attribute.errors.missing">Required attribute</mat-error>
+</mat-form-field>
+<masterdata-file-input *ngIf="type == 'image'" [value]="value" [placeholder]="name+(config.required?' *':'')" (changed)="handleFileChange($event)"></masterdata-file-input>
+<document-input *ngIf="type == 'link'" [(ngModel)]="value" [placeholder]="name" name="attribute" [required]="config.required?'':undefined"></document-input>
+<section class="bool" *ngIf="type == 'boolean'">
+  <mat-checkbox name="attribute" [(ngModel)]="value">
+    {{name}}
+  </mat-checkbox>
+</section>
+<div *ngIf="type == 'separator'" class="strike">
+  <span>{{name}}</span>
+</div>

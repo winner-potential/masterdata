@@ -1,0 +1,17 @@
+.login-card {
+  max-width: 400px;
+  margin: 0 auto;
+  margin-top: 10px;
+}
+
+.login-full-width {
+  width: 100%;
+}
+
+.error {
+  color: red;
+}
+
+.saving-card mat-spinner {
+    margin: 0 auto;
+}

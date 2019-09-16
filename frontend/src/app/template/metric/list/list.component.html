@@ -1,0 +1,13 @@
+<mat-nav-list *ngIf="!loading">
+  <div *ngFor="let metric of metrics; first as isFirst">
+    <mat-divider *ngIf="!isFirst"></mat-divider>
+    <a mat-list-item (click)="details(metric._id)" [class.selected]="isSelected(metric._id)">
+      <h4 matLine>{{metric.alias?metric.alias:metric.name}}<span class="note" *ngIf="metric.alias"> ({{metric.name}})</span></h4>
+      <p mat-line>{{metric.description}}</p>
+    </a>
+  </div>
+</mat-nav-list>
+
+<div class="saving-card" *ngIf="loading">
+  <mat-spinner color="accent"></mat-spinner>
+</div>

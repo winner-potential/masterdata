@@ -1,0 +1,11 @@
+FROM node:12.10.0-alpine
+ENV HOME=/usr/src/app
+RUN mkdir -p $HOME
+WORKDIR $HOME
+RUN npm install -g @angular/cli
+COPY entrypoint.sh /usr/src/
+RUN chmod +x /usr/src/entrypoint.sh
+EXPOSE 4200
+USER 1000
+ENTRYPOINT ["/usr/src/entrypoint.sh"]
+CMD ["run", "start"]

@@ -1,0 +1,11 @@
+.note {
+  color: gray;
+}
+
+.selected {
+  color: #3f51b5;
+}
+
+.saving-card mat-spinner {
+  margin: 0 auto;
+}

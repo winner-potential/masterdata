@@ -1,0 +1,10 @@
+<div class="input-container">
+  <!-- accept="image/*" -->
+  <input #file type="file" [hidden]="true" [accept]="accept" (change)="handleUpload(file.files)">
+
+  <mat-form-field class="input-fullwidth">
+    <input matInput type="text" [readonly]="true" [placeholder]="placeholder" name="filename" [(ngModel)]="filename" />
+  </mat-form-field>
+
+  <button mat-button type="button" #upload (click)="file.click()">Upload file</button>
+</div>

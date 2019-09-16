@@ -1,0 +1,8 @@
+<h1 mat-dialog-title>{{data.title || "Confirm Delete"}}</h1>
+<div mat-dialog-content>
+  <p>{{data.message || "Do you really want to delete this entry?"}}</p>
+</div>
+<div mat-dialog-actions align="end">
+  <button mat-button (click)="onAbort()" cdkFocusInitial>Abort</button>
+  <button mat-button (click)="onOk()">Yes</button>
+</div>

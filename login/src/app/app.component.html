@@ -1,0 +1,25 @@
+<form class="login-form" *ngIf="!saving">
+    <mat-card class="login-card">
+        <mat-card-title>Login</mat-card-title>
+        <mat-card-content>
+            <p *ngIf="error" class="error">{{error}}</p>
+            <mat-form-field class="login-full-width">
+                <input matInput type="text" placeholder="Username" name="username" [(ngModel)]="username" required />
+                <mat-error *ngIf="!username">Missing username</mat-error>
+            </mat-form-field>
+            <mat-form-field class="login-full-width">
+                <input matInput type="password" placeholder="Password" name="password" [(ngModel)]="password" required />
+                <mat-error *ngIf="!password">Missing password</mat-error>
+            </mat-form-field>
+        </mat-card-content>
+        <mat-card-actions>
+            <button type="button" mat-button color="primary" (click)="login()">Login</button>
+        </mat-card-actions>
+    </mat-card>
+</form>
+
+<mat-card class="saving-card login-card" *ngIf="saving">
+    <mat-card-content>
+        <mat-spinner></mat-spinner>
+    </mat-card-content>
+</mat-card>

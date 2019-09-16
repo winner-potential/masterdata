@@ -1,0 +1,48 @@
+.timeseriesentry button {
+  visibility: hidden;
+}
+
+.timeseriesentry:hover button {
+  visibility: visible;
+  color: red;
+}
+
+plotly-plot {
+  width: 100%;
+}
+
+.time {
+  width: 15%;
+}
+
+.date {
+  width: calc(65% - 50px);
+}
+
+.range {
+  text-align: center;
+}
+
+.range mat-form-field {
+  margin-left: 1%;
+}
+.range .datetime,
+.range .forward,
+.range .refresh {
+  margin-left: 15px;
+  display: inline-block;
+}
+
+.datetime {
+  width: 80%;
+  max-width: 400px;
+}
+
+.saving-card mat-spinner {
+  margin: 0 auto;
+}
+
+span.metric-loader mat-spinner {
+  display: inline-block;
+  margin-left: 20px;
+}

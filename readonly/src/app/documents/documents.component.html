@@ -1,0 +1,15 @@
+<i class="note" *ngIf="search||type">Documents <span *ngIf="search"> matching "{{search}}"</span><span *ngIf="type"> with type "{{typeName(type)}}"</span></i>
+<mat-nav-list *ngIf="!loading">
+  <div *ngFor="let document of documents; first as isFirst; index as i">
+    <h3 style="margin-top: 15px;" *ngIf="i == 0 || documents[i - 1].template != document.template" mat-subheader>{{typeName(document.template)}}</h3>
+    <mat-divider *ngIf="i == 0 || documents[i - 1].template != document.template || documents[i - 1].template == document.template"></mat-divider>
+    <a mat-list-item (click)="details(document._id)" [class.selected]="isSelected(document._id)">
+      <h4 matLine>{{document.name}}</h4>
+      <p mat-line>{{document.description}}</p>
+    </a>
+  </div>
+</mat-nav-list>
+
+<div class="saving-card" *ngIf="loading">
+  <mat-spinner color="accent"></mat-spinner>
+</div>

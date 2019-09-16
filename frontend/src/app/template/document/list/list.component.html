@@ -1,0 +1,15 @@
+<mat-nav-list *ngIf="!loading">
+  <div *ngFor="let document of documents; first as isFirst">
+    <mat-divider *ngIf="!isFirst"></mat-divider>
+    <a mat-list-item (click)="details(document._id)" [class.selected]="isSelected(document._id)">
+      <h4 matLine>{{document.alias?document.alias:document.name}}
+        <span class="note" *ngIf="document.alias"> ({{document.name}})</span>
+      </h4>
+      <p mat-line>{{document.description}}</p>
+    </a>
+  </div>
+</mat-nav-list>
+
+<div class="saving-card" *ngIf="loading">
+  <mat-spinner color="accent"></mat-spinner>
+</div>

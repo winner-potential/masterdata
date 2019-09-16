@@ -1,0 +1,105 @@
+<form class="document-template-form" *ngIf="!saving && !loading">
+  <mat-card class="document-template-card">
+    <mat-card-title>Document Template Details</mat-card-title>
+    <mat-card-subtitle>Basics</mat-card-subtitle>
+    <mat-card-content>
+      <mat-form-field class="document-template-full-width">
+        <input matInput type="text" placeholder="Name" name="name" [(ngModel)]="name" required #spy />
+        <mat-error *ngIf="!name">Missing document name</mat-error>
+      </mat-form-field>
+      <mat-form-field class="document-template-full-width">
+        <input matInput type="text" placeholder="Alias" name="alias" [(ngModel)]="alias" />
+      </mat-form-field>
+      <mat-form-field class="document-template-full-width">
+        <input matInput type="text" placeholder="Description" name="description" [(ngModel)]="description" />
+      </mat-form-field>
+      <mat-form-field *ngIf="documents.length" class="document-template-full-width">
+        <mat-select placeholder="Extends" name="extends" [(ngModel)]="extends" (ngModelChange)="handleNewExtends($event)">
+          <mat-option>None</mat-option>
+          <mat-option *ngFor="let document of documents" [value]="document._id">
+            {{document.alias ? document.alias : document.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <section class="example-section">
+        <mat-checkbox class="example-margin" name="public" [(ngModel)]="isPublic">
+          Public
+        </mat-checkbox>
+      </section>
+    </mat-card-content>
+  </mat-card>
+  <mat-card class="document-template-card">
+    <mat-card-header>
+      <div mat-card-avatar>
+        <mat-icon class="mat-icon-rtl-mirror">
+          assignment
+        </mat-icon>
+      </div>
+      <mat-card-title>Attributes</mat-card-title>
+      <mat-card-subtitle>Based on template</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-form-field class="document-template-full-width">
+        <mat-select placeholder="Identifier" name="identifier" [(ngModel)]="identifier" required>
+          <mat-option *ngFor="let attribute of identifiers" [value]="attribute.short">
+            {{attribute.full}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="!name">{{getIdentifierError()}}</mat-error>
+      </mat-form-field>
+      <div class="attributes" [sortablejs]="attributeDefinitions.definitions">
+        <div class="attribute" *ngFor="let attribute of attributeDefinitions; let index = index">
+          <document-attribute-type [attribute]="attribute" [needed]="true" icon="close" (change)="changeAttribute($event, index)" (action)="removeAttribute(index)"></document-attribute-type>
+        </div>
+      </div>
+      <div class="attribute">
+        <document-attribute-type [attribute]="newAttribute" icon="add" (action)="addAttribute()"></document-attribute-type>
+      </div>
+    </mat-card-content>
+  </mat-card>
+  <mat-card class="document-template-card">
+    <mat-card-header>
+      <div mat-card-avatar>
+        <mat-icon class="mat-icon-rtl-mirror">
+          timeline
+        </mat-icon>
+      </div>
+      <mat-card-title>Metrics</mat-card-title>
+      <mat-card-subtitle>Allowed for instances of this template</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-nav-list>
+        <mat-list-item *ngFor="let metric of metrics;let index = index">
+          <span matLine>{{metric.alias ? metric.alias : metric.name}}
+            <span *ngIf="metric.alias" class="note"> ({{metric.name}})</span>
+          </span>
+          <button mat-icon-button type="button" (click)="removeMetric(index)">
+            <mat-icon>close</mat-icon>
+          </button>
+        </mat-list-item>
+      </mat-nav-list>
+      <mat-form-field *ngIf="metricsAvailable.length" class="document-template-full-width">
+        <mat-select placeholder="Add Metric" name="newMetric" [(ngModel)]="newMetric" (ngModelChange)="handleNewMetric($event)">
+          <mat-option *ngFor="let metric of metricsAvailable" [value]="metric._id">
+            {{metric.alias ? metric.alias : metric.name}}
+            <span *ngIf="metric.alias" class="note"> ({{metric.name}})</span>
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </mat-card-content>
+  </mat-card>
+  <mat-card class="document-template-card">
+    <mat-card-content>
+      <button mat-button type="button" color="primary" (click)="save()">Save</button>
+      <button mat-button type="button" color="warn" *ngIf="id" (click)="delete()">Delete</button>
+    </mat-card-content>
+  </mat-card>
+</form>
+
+<div class="saving-card" *ngIf="saving">
+  <mat-spinner></mat-spinner>
+</div>
+
+<div class="saving-card" *ngIf="loading">
+  <mat-spinner color="accent"></mat-spinner>
+</div>

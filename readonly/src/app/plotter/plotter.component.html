@@ -1,0 +1,62 @@
+<div class="range">
+  <div class="datetime">
+    <mat-form-field class="date">
+      <input matInput [matDatepicker]="startPicker" placeholder="Start" [(ngModel)]="startDate">
+      <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
+      <mat-datepicker #startPicker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field class="time">
+      <input matInput type="number" placeholder="Hour" min="0" max="24" [(ngModel)]="startHour">
+      <mat-error>Has to be between 0 and 24.</mat-error>
+    </mat-form-field>
+    <mat-form-field class="time">
+      <input matInput type="number" placeholder="Minute" min="0" max="60" [(ngModel)]="startMinute">
+      <mat-error>Has to be between 0 and 24.</mat-error>
+    </mat-form-field>
+    <div class="forward">
+      <button mat-icon-button (click)="swap()">
+        <mat-icon>swap_horiz</mat-icon>
+      </button>
+    </div>
+  </div>
+  <div class="datetime">
+    <mat-form-field class="date">
+      <input matInput [matDatepicker]="endPicker" placeholder="End" [(ngModel)]="endDate">
+      <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
+      <mat-datepicker #endPicker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field class="time">
+      <input matInput type="number" placeholder="Hour" min="0" max="24" [(ngModel)]="endHour">
+      <mat-error>Has to be between 0 and 24.</mat-error>
+    </mat-form-field>
+    <mat-form-field class="time">
+      <input matInput type="number" placeholder="Minute" min="0" max="60" [(ngModel)]="endMinute">
+      <mat-error>Has to be between 0 and 24.</mat-error>
+    </mat-form-field>
+    <div class="refresh">
+      <button mat-icon-button (click)="draw()">
+        <mat-icon class="mat-24">search</mat-icon>
+      </button>
+    </div>
+  </div>
+</div>
+<plotly-plot *ngIf="timeseries.length && resultCount" useResizeHandler="true" [data]="graph.data" [layout]="graph.layout"></plotly-plot>
+<div>
+  <h3>Current Metrics and Relations</h3>
+  <mat-nav-list *ngIf="timeseries.length">
+    <div *ngFor="let ts of timeseries; first as isFirst">
+      <mat-divider *ngIf="!isFirst"></mat-divider>
+      <a mat-list-item class="timeseriesentry" (click)="remove(ts.id)">
+        <mat-icon mat-list-icon [style.color]="ts.color">timeline</mat-icon>
+        <h4 matLine>{{ts.name}}<span *ngIf="ts.count > 0"> ({{ts.count}})</span><span *ngIf="ts.metric && ts.metric.unit"> [{{ts.metric.unit}}]</span> <span *ngIf="ts.loading" class="metric-loader"><mat-spinner color="accent" [diameter]="20"></mat-spinner></span></h4>
+        <p class="note" mat-line>{{ts.metric.alias ? ts.metric.alias : ts.metric.name}} <span *ngIf="ts.metric.description" class="note">({{ts.metric.description}})</span><span *ngIf="ts.metric && ts.metric.document"> from {{ts.metric.document.name}}</span></p>
+
+        <button mat-icon-button>
+          <mat-icon class="mat-24">delete</mat-icon>
+        </button>
+      </a>
+    </div>
+  </mat-nav-list>
+</div>
+
+<i class="note" *ngIf="timeseries.length == 0">No metrics to plot</i>

@@ -1,0 +1,17 @@
+version: "3"
+
+services:
+  db: 
+    image: mongo:3.6.5-jessie
+    ports:
+      - 27017:27017
+  backend:
+    build:
+      context: utils/
+      dockerfile: Dockerfile.backend
+    environment:
+      PROFILE: test
+      DATABASE: "mongodb://db/masterdata"
+    volumes:
+        - ./backend:/usr/src/app
+    command: "run test-verbose"

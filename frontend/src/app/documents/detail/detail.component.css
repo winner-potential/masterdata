@@ -1,0 +1,53 @@
+.document-form {
+    min-width: 150px;
+    max-width: 650px;
+    width: 100%;
+}
+
+mat-accordion mat-panel-title,
+mat-accordion mat-panel-description {
+  flex-basis: 0;
+}
+
+mat-accordion mat-panel-title,
+mat-accordion mat-panel-description {
+  justify-content: space-between;
+  align-items: center;
+}
+
+.document-card {
+    margin-bottom: 10px;
+}
+
+.document-full-width {
+    width: 100%;
+}
+
+.attribute mat-form-field {
+    width: 38%;
+    margin-left: 10px;
+}
+
+.saving-card mat-spinner {
+    margin: 0 auto;
+}
+
+.fab-bottom-right {
+  position: -webkit-sticky;
+  position: sticky;
+  left: calc(100% - 50px);
+  bottom: 20px;
+}
+
+.document-card .mat-card-avatar {
+    text-align: center;
+    line-height: 40px;
+}
+
+.document-card .mat-card-avatar .mat-icon {
+    vertical-align: middle;
+}
+
+.buttons {
+    margin-top: 10px;
+}

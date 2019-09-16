@@ -1,0 +1,49 @@
+<mat-card class="document-card" *ngIf="!loading">
+  <mat-card-header>
+    <div mat-card-avatar>
+      <mat-icon class="mat-icon-rtl-mirror">
+        library_books
+      </mat-icon>
+    </div>
+    <mat-card-title>{{name}}</mat-card-title>
+    <mat-card-subtitle>{{description}}</mat-card-subtitle>
+  </mat-card-header>
+  <div class="document-image-container" *ngIf="images.length">
+    <div *ngFor="let i of images;let n=index" class="img" [class.active]="(pointer%images.length) == n" [ngStyle]="{ 'background-image': 'url(' + i + ')' }"
+      (click)="handleImageClicked($e)"></div>
+    <div class="goto">
+      <div *ngFor="let i of images;let n=index" class="go" (click)="pointer = n"></div>
+    </div>
+  </div>
+  <mat-card-content>
+    <ng-container *ngFor="let group of groups">
+      <ng-container *ngIf="group.attributes.length">
+        <div *ngIf="group.name" class="strike">
+          <span>{{group.name}}</span>
+        </div>
+        <dl>
+          <ng-container *ngFor="let attr of group.attributes">
+            <ng-container *ngIf="attr.type == 'link'">
+              <dt>{{attr.name}}</dt>
+              <dd (click)="goTo(attr.value)" class="link">{{(getDocument(attr.value) | async)?.name}}</dd>
+            </ng-container>
+            <ng-container *ngIf="attr.type != 'link'">
+              <dt>{{attr.name}}</dt>
+              <dd>{{attr.value}}</dd>
+            </ng-container>
+          </ng-container>
+        </dl>
+      </ng-container>
+    </ng-container>
+  </mat-card-content>
+</mat-card>
+
+<mat-card class="document-card" *ngIf="!loading && name">
+  <mat-card-content>
+    <document-metric-tree [document]="document" (selected)="handleMetricClick($event)"></document-metric-tree>
+  </mat-card-content>
+</mat-card>
+
+<div class="saving-card" *ngIf="loading">
+  <mat-spinner color="accent"></mat-spinner>
+</div>

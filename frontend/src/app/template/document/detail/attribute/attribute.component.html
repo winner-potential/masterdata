@@ -1,0 +1,26 @@
+<div class="attribute">
+  <mat-checkbox class="should" [(ngModel)]="should" name="should"></mat-checkbox>
+  <mat-form-field>
+    <mat-select *ngIf="needed" placeholder="Type" [(ngModel)]="type" name="type" required>
+      <mat-option *ngFor="let t of types" [value]="t">
+        {{t}}
+      </mat-option>
+    </mat-select>
+    <mat-error>Requires type</mat-error>
+    <mat-select *ngIf="!needed" placeholder="Type" [(ngModel)]="type" name="type">
+      <mat-option *ngFor="let t of types" [value]="t">
+        {{t}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field>
+    <input *ngIf="needed" matInput type="text" placeholder="Name" name="name" [(ngModel)]="name" [attribute-type-validation]="content"
+      required />
+    <input *ngIf="!needed" matInput type="text" placeholder="Name" name="name" [(ngModel)]="name" [attribute-type-validation]="content"
+    />
+    <mat-error>Requires unique name</mat-error>
+  </mat-form-field>
+  <button class="action" mat-icon-button type="button" (click)="triggerAction()">
+    <mat-icon>{{icon}}</mat-icon>
+  </button>
+</div>

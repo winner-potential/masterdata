@@ -1,0 +1,42 @@
+.document-template-form {
+  min-width: 150px;
+  max-width: 650px;
+  width: 100%;
+}
+
+.document-template-card {
+  margin-bottom: 10px;
+}
+
+.document-template-full-width {
+  width: 100%;
+}
+
+.attribute mat-form-field {
+  width: 38%;
+  margin-left: 10px;
+}
+
+.attribute {
+    cursor: move;
+}
+.attribute:hover {
+    background-color: #fafafa;
+}
+
+.saving-card mat-spinner {
+  margin: 0 auto;
+}
+
+.document-template-card .mat-card-avatar {
+  text-align: center;
+  line-height: 40px;
+}
+
+.document-template-card .mat-card-avatar .mat-icon {
+  vertical-align: middle;
+}
+
+.attributes {
+  width: 100%;
+}

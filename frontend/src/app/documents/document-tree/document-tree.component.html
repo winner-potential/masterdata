@@ -1,0 +1,30 @@
+<mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
+  <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding (click)="handleClick(node)" [class.selected]="isSelected(node.item._id) | async">
+    <button mat-icon-button>
+      <mat-icon class="mat-icon-rtl-mirror">
+        library_books
+      </mat-icon>
+    </button>
+
+    <span>
+      <span class="mat-subheading-2">{{node.item.name}}
+        <span *ngIf="node.item.templateData" class="note"> ({{node.item.templateData.alias ? node.item.templateData.alias : node.item.templateData.name}})</span>
+      </span>
+      <br>{{node.item.description}}</span>
+  </mat-tree-node>
+  <mat-tree-node *matTreeNodeDef="let node; when: hasChild" matTreeNodePadding (click)="handleClick(node)" [class.selected]="isSelected(node.item._id) | async">
+    <button mat-icon-button [attr.aria-label]="'toggle ' + node.item._id" matTreeNodeToggle>
+      <mat-icon class="mat-icon-rtl-mirror">
+        {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+      </mat-icon>
+    </button>
+    <span>
+      <span class="mat-subheading-2">{{node.item.name}}
+        <span *ngIf="node.item.templateData" class="note"> ({{node.item.templateData.alias ? node.item.templateData.alias : node.item.templateData.name}})</span>
+      </span>
+      <br>{{node.item.description}}</span>
+  </mat-tree-node>
+</mat-tree>
+<p *ngIf="dataSource.empty()" class="note">
+  <i>No documents available</i>
+</p>

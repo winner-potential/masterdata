@@ -1,0 +1,7 @@
+public
+views
+node_modules
+.nyc_output
+coverage
+report.html
+img

@@ -1,0 +1,14 @@
+<mat-grid-list *ngIf="!loading" [cols]="cols | async" rowHeight="150px" gutterSize="15px">
+  <ng-container *ngFor="let temp of templates">
+    <mat-grid-tile colspan="1" rowspan="1" *ngIf="counts.get(temp._id)" class="template-card" (click)="goto(temp._id)">
+      <div class="template">
+        <h2>{{temp.alias ? temp.alias : temp.name}}</h2>
+        <p>{{temp.description}}</p>
+      </div>
+    </mat-grid-tile>
+  </ng-container>
+</mat-grid-list>
+
+<div class="saving-card" *ngIf="loading">
+  <mat-spinner color="accent"></mat-spinner>
+</div>

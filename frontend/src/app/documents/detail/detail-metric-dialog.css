@@ -1,0 +1,16 @@
+.dialog-full-width {
+  width: 100%;
+}
+.dialog-radio-group {
+  display: inline-flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
+.dialog-radio-button {
+  margin: 5px;
+}
+
+.dialog-selected-value {
+  margin: 15px 0;
+}

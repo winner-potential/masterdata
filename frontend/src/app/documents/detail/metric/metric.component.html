@@ -1,0 +1,9 @@
+<mat-form-field class="metric-full-width">
+    <input matInput type="text" placeholder="Alias" name="alias" [(ngModel)]="alias" />
+  </mat-form-field>
+<mat-form-field class="metric-full-width">
+  <input matInput type="text" placeholder="Key" [(ngModel)]="key" name="key" required />
+  <mat-error>Missing key for metric</mat-error>
+</mat-form-field>
+<document-metric-tag *ngFor="let tag of metricTemplate.tags" [tag-name]="tagTemplates[tag].alias ? tagTemplates[tag].alias : tagTemplates[tag].name" [tag-default-value]="tagTemplates[tag].value"
+  [tag]="getTag(tag)"></document-metric-tag>

@@ -1,0 +1,6 @@
+backend/node_modules
+backend/views
+backend/public
+frontend/node_modules
+readonly/node_modules
+login/node_modules

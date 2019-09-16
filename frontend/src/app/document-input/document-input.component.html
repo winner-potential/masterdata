@@ -1,0 +1,13 @@
+<mat-form-field class="document-input-full-width">
+  <input *ngIf="required" matInput type="text" [placeholder]="placeholder" name="document" [(ngModel)]="document" (input)="handleDocument($event)"
+    [matAutocomplete]="auto" required selection-validator>
+  <input *ngIf="!required" matInput type="text" [placeholder]="placeholder" name="document" [(ngModel)]="document" (input)="handleDocument($event)"
+    [matAutocomplete]="auto">
+  <mat-autocomplete #auto="matAutocomplete" [displayWith]="extractDisplayValue" (optionSelected)="handleSelection($event)">
+    <mat-option *ngFor="let d of documents" [value]="d">
+      {{d.name}}
+      <span *ngIf="d.description" class="note"> {{d.description}}</span>
+    </mat-option>
+  </mat-autocomplete>
+  <mat-error>Missing document</mat-error>
+</mat-form-field>

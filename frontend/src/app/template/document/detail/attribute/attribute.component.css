@@ -1,0 +1,8 @@
+.attribute .action {
+    float: right;
+}
+
+.attribute mat-form-field {
+    width: calc(48% - 30px);
+    margin-left: 2%;
+}

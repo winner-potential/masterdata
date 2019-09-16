@@ -1,0 +1,18 @@
+<h1 mat-dialog-title>Add Metric</h1>
+<div mat-dialog-content>
+    <mat-radio-group class="dialog-radio-group" [(ngModel)]="data.type">
+        <mat-radio-button class="dialog-radio-button" value="source">Source</mat-radio-button>
+        <mat-radio-button class="dialog-radio-button" value="relation">Relation</mat-radio-button>
+    </mat-radio-group>
+    <mat-form-field class="dialog-full-width">
+        <mat-select placeholder="Select Metric" name="selection" [(ngModel)]="data.selection">
+            <mat-option *ngFor="let m of data.usableMetrics" [value]="data.metricTemplates[m]._id">
+                {{data.metricTemplates[m].alias ? data.metricTemplates[m].alias : data.metricTemplates[m].name}}<span *ngIf="data.metricTemplates[m].alias" class="note"> ({{data.metricTemplates[m].name}})</span>
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+</div>
+<div mat-dialog-actions>
+    <button mat-button type="button" (click)="onNoClick()">Cancel</button>
+    <button mat-button type="button" *ngIf="data.type && data.selection" [mat-dialog-close]="data" color="primary" cdkFocusInitial>Add</button>
+</div>

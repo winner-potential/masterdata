@@ -1,0 +1,46 @@
+version: "3"
+
+services:
+  db: 
+    image: mongo:3.6.5-jessie
+    volumes:
+      - 'data:/data/db'
+  frontend:
+    build:
+      context: utils/
+      dockerfile: Dockerfile.ngcli
+    volumes:
+        - ./frontend:/usr/src/app
+    ports:
+      - 4200:4200
+  readonly:
+    build:
+      context: utils/
+      dockerfile: Dockerfile.ngcli
+    volumes:
+        - ./readonly:/usr/src/app
+    ports:
+      - 4201:4200
+  login:
+    build:
+      context: utils/
+      dockerfile: Dockerfile.ngcli
+    volumes:
+        - ./login:/usr/src/app
+    ports:
+      - 4202:4200
+  backend:
+    build:
+      context: utils/
+      dockerfile: Dockerfile.backend
+    environment:
+      PROFILE: dev
+      DATABASE: "mongodb://db/masterdata"
+      BASEPATH: "http://localhost:3000/"
+    volumes:
+        - ./backend:/usr/src/app
+    ports:
+      - 3000:3000
+
+volumes:
+  data:

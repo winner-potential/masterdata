@@ -1,0 +1,12 @@
+.input-container {
+    display: flex;
+    align-items: baseline;
+}
+
+.input-container .input-fullwidth {
+    flex-grow: 1;
+}
+
+.input-container button {
+    margin-left: 10px;
+}

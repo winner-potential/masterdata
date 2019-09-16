@@ -1,0 +1,33 @@
+<mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
+  <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding>
+    <!--button mat-icon-button disabled></button-->
+    <button mat-icon-button (click)="handleNodeClick(node);">
+      <mat-icon class="mat-icon-rtl-mirror" color="accent">
+        timeline
+      </mat-icon>
+    </button>
+
+    <span *ngIf="node.item.data.alias">{{node.item.data.alias}}
+      <span *ngIf="node.item.data.unit">[{{node.item.data.unit}}] </span>
+      <span *ngIf="node.item.data.description" class="note">{{node.item.data.description}} ({{node.item.data.name}})</span>
+    </span>
+    <span *ngIf="!node.item.data.alias">{{node.item.data.name}}
+      <span *ngIf="node.item.data.unit">[{{node.item.data.unit}}] </span>
+      <span *ngIf="node.item.data.description" class="note">{{node.item.data.description}}</span>
+    </span>
+  </mat-tree-node>
+  <mat-tree-node *matTreeNodeDef="let node; when: hasChild" matTreeNodePadding>
+    <button mat-icon-button [attr.aria-label]="'toggle ' + node.item.data._id" matTreeNodeToggle>
+      <mat-icon class="mat-icon-rtl-mirror">
+        {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+      </mat-icon>
+    </button>
+    <span>{{node.item.data.name}}
+      <span *ngIf="node.item.data.description && !node.isLoading" class="note">{{node.item.data.description}}</span>
+    </span>
+    <mat-progress-bar *ngIf="node.isLoading" mode="indeterminate" class="metric-tree-progress-bar"></mat-progress-bar>
+  </mat-tree-node>
+</mat-tree>
+<p *ngIf="dataSource.empty()" class="note">
+  <i>No childs available</i>
+</p>

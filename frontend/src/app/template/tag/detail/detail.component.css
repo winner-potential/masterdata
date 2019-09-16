@@ -1,0 +1,26 @@
+.tag-template-form {
+  min-width: 150px;
+  max-width: 650px;
+  width: 100%;
+}
+
+.tag-template-card {
+  margin-bottom: 10px;
+}
+
+.tag-template-full-width {
+  width: 100%;
+}
+
+.saving-card mat-spinner {
+    margin: 0 auto;
+}
+
+.document-card .mat-card-avatar {
+    text-align: center;
+    line-height: 40px;
+}
+
+.document-card .mat-card-avatar .mat-icon {
+    vertical-align: middle;
+}
