@@ -1,0 +1,43 @@
+language: node_js
+node_js: "12"
+sudo: required
+
+env:
+  global:
+    - IMAGE_NAME=masterdatamgmt/full
+
+services:
+  - docker
+
+branches:
+  only:
+    - master
+
+before_script:
+  - npm install -g @angular/cli
+  - docker pull "$IMAGE_NAME" || true
+
+script:
+  - npm
+  - cd frontend
+  - npm install
+  - ng build --prod
+  - cd ..
+  - cd readonly
+  - npm install
+  - ng build --prod
+  - cd ..
+  - cd login
+  - npm install
+  - ng build --prod
+  - cd ..
+  - docker build --cache-from "${IMAGE_NAME}:latest" -t masterdatamgmt/full:latest .
+
+
+before_deploy:
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+deploy:
+  provider: script
+  script: docker push "${IMAGE_NAME}:latest"
+  on:
+    branch: master
