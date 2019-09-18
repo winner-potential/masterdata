@@ -109,7 +109,7 @@ if (process.env.NODE_ENV != "test") {
   prepareIndex(["*"], "", "views/viewer.html");
 }
 
-var databaseUri = process.env.DATABASE || (process.env.MONGODB_NAME ? "mongodb://mongodb/masterdata" : "") || "mongodb://localhost/masterdata";
+var databaseUri = process.env.DATABASE || (process.env.MONGODB_NAME ? "mongodb://mongodb/" + process.env.MONGODB_NAME : "") || "mongodb://localhost/masterdata";
 var databaseUrl = url.parse(databaseUri);
 
 log("Wait for Database %o", databaseUri);

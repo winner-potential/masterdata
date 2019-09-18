@@ -3,11 +3,26 @@
 Context informationen management in measurement and processing infrastructures for distributed architectures with independent and isolated services for integration, processing and consumption tasks.
 The service provides a management instance that provides access to the knowledge about sensors and the corresponding context via a query language.
 
-## Start Instance
+[![Build Status](https://travis-ci.org/winner-potential/masterdata.svg?branch=master)](https://travis-ci.org/winner-potential/masterdata)
+
+## Start
 
 The service is available as a docker image, requires a MongoDB for data storage, and can be started using the following docker compose.
 The authentication and authorization is realized via LDAP.
 If this is not available for testing purposes, the profile `dev` can be activated, so that no credential checking takes place, and all users will be authorized as administrators.
+
+### Docker
+
+Use the following commands to start the MongoDB and Masterdata instance:
+
+```bash
+docker run -v /data/db --name mongodb mongo:3.6.5-jessie
+docker run -p 3000:3000 -v /var/lib/app/img --link mongodb -e DATABASE=mongodb://mongodb/masterdata -e BASEPATH=http://localhost:3000/ -e PROFILE=dev masterdatamgmt/full:latest
+```
+
+### Docker-Compose
+
+Use the following `docker-compose.yml` to start the MongoDB and Masterdata instance:
 
 ``` yml
 version: "3"
@@ -41,6 +56,12 @@ volumes:
   img:
 ```
 
+Finally, use the following command to start this setup:
+
+``` bash
+docker-compose up
+```
+
 ## Get Started
 
 ### Example Data Model
@@ -64,6 +85,8 @@ In this example, a sensor is created that generates a temperature measurement an
     - Expand relation for metric details
     - Search in `Reference Document` for `first-sensor`
     - Finally, save
+
+**tl;dr** You can take a look at the [Masterdata-Importer](https://github.com/winner-potential/masterdata-importer) to initialize the database entries.
 
 ### Request Metrics by Type
 

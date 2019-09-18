@@ -30,7 +30,7 @@ script:
   - npm install
   - ng build --prod
   - cd ..
-  - docker build --cache-from "${IMAGE_NAME}:latest" -t masterdatamgmt/full:latest .
+  - docker build --cache-from "${IMAGE_NAME}:latest" -t ${IMAGE_NAME}:latest .
 
 cache:
   directories:
