@@ -2,7 +2,8 @@ import { Component, OnInit } from "@angular/core";
 import { Router, ActivatedRoute } from "@angular/router";
 import { ApiService } from "../../../api.service";
 import { ActionsService } from "../../../actions.service";
-import { MatSnackBar, MatDialog } from "@angular/material";
+import { MatDialog } from "@angular/material/dialog";
+import { MatSnackBar } from "@angular/material/snack-bar";
 import { ReallyDeleteComponent, ReallyDeleteData } from "src/app/really-delete/really-delete.component";
 
 @Component({
