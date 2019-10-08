@@ -25,7 +25,7 @@
     "@auth0/angular-jwt": "^3.0.0",
     "angular-plotly.js": "^0.1.14",
     "core-js": "^2.5.4",
-    "plotly.js": "^1.41.3",
+    "plotly.js": "^1.50.0",
     "rxjs": "^6.5.3",
     "zone.js": "^0.9.1"
   },
