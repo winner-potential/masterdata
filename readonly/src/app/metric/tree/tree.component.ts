@@ -116,7 +116,7 @@ export class DynamicMetricDataSource {
   constructor(private treeControl: FlatTreeControl<DynamicMetricNode>, private database: DynamicMetricDatabase) {}
 
   connect(collectionViewer: CollectionViewer): Observable<DynamicMetricNode[]> {
-    this.treeControl.expansionModel.onChange!.subscribe(change => {
+    this.treeControl.expansionModel.changed!.subscribe(change => {
       if ((change as SelectionChange<DynamicMetricNode>).added || (change as SelectionChange<DynamicMetricNode>).removed) {
         this.handleTreeControl(change as SelectionChange<DynamicMetricNode>);
       }
