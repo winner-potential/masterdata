@@ -18,7 +18,7 @@ before_script:
   - npm install -g @angular/cli
   - docker pull "$IMAGE_NAME" || true
   - export DISPLAY=:99.0
-  - sh -e /etc/init.d/xvfb start
+  - sudo systemctl start xvfb
 
 script:
   - cd frontend
