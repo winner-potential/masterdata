@@ -32,6 +32,6 @@
     "fs-extra": "^7.0.0",
     "mocha": "^5.2.0",
     "mocha-simple-html-reporter": "^1.1.0",
-    "nyc": "^12.0.2"
+    "nyc": "^14.1.1"
   }
 }
