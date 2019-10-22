@@ -24,17 +24,17 @@ script:
   - cd frontend
   - npm install
   - ng build --prod
-  - ng test --browsers Firefox
+  #- ng test --browsers Firefox
   - cd ..
   - cd readonly
   - npm install
   - ng build --prod
-  - ng test --browsers Firefox
+  #- ng test --browsers Firefox
   - cd ..
   - cd login
   - npm install
   - ng build --prod
-  - ng test --browsers Firefox
+  #- ng test --browsers Firefox
   - cd ..
   - docker build --cache-from "${IMAGE_NAME}:latest" -t ${IMAGE_NAME}:latest .
 
