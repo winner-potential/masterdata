@@ -102,6 +102,19 @@ TOKEN=$(curl --silent -X POST http://localhost:3000/api/v1.0/authentificate/ -H 
 curl -X POST http://localhost:3000/api/v1.0/metric/resolve -H "Content-Type: application/json" -d '{"query": "sensor[id=abc]"}' -H "x-access-token: $TOKEN"
 ```
 
+Put simply, a metric can be requested in two steps:
+
+- First, obtain an authentication token by sending a HTTP POST request to
+  `[your-service]/api/v1.0/authentificate/`. The request header shoud have `Content-Type`
+  set to `application/json`. The body must be a JSON object with the two attributes
+  `username` and `password` set to their appropriate values.
+- On successful authentication, a JSON object containing the authentication token is returned.
+  Using that token, metrics can be requested by sending a HTTP POST request to
+  `[your-service]/api/v1.0/metric/resolve/`. The request header again needs to have `Content-Type`
+  set to `application/json` as well as an additional attribute `x-access-token` set to the access token
+  obtained in the previous step. The request body is a JSON object with the attribute `query` containing
+  your query.
+
 ### Query Language
 
 The query syntax for resolve requests allows you to address subtrees from the structure.
