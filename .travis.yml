@@ -37,8 +37,9 @@ script:
   #- ng test --browsers Firefox
   - cd ..
   - cd backend
-  - docker-compose -f docker-compose-test.yml up --exit-code-from backend
+  - npm install
   - cd ..
+  - docker-compose -f docker-compose-test.yml up --exit-code-from backend
   - docker build --cache-from "${IMAGE_NAME}:latest" -t ${IMAGE_NAME}:latest .
 
 cache:
