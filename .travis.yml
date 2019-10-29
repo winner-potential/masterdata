@@ -2,6 +2,10 @@ language: node_js
 node_js: "12"
 sudo: required
 
+env:
+  global:
+    - IMAGE_NAME=masterdatamgmt/full
+
 services:
   - docker
 
@@ -12,6 +16,7 @@ branches:
 
 before_script:
   - npm install -g @angular/cli
+  - docker pull "$IMAGE_NAME" || true
   - export DISPLAY=:99.0
   - sudo systemctl start xvfb
 
@@ -37,6 +42,7 @@ script:
   - docker-compose -f docker-compose-test.yml up --exit-code-from backend
   - sudo chown -R $(whoami):$(id -g -n) backend
   - chmod -R 755 backend
+  - docker build --cache-from "${IMAGE_NAME}:latest" -t ${IMAGE_NAME}:latest .
 
 cache:
   directories:
@@ -44,3 +50,11 @@ cache:
     - readonly/node_modules
     - login/node_modules
     - backend/node_modules
+
+before_deploy:
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+deploy:
+  provider: script
+  script: docker push "${IMAGE_NAME}:latest"
+  on:
+    branch: master
