@@ -10,6 +10,10 @@ branches:
     - master
     - development
 
+before_install:
+  - sudo apt-get update
+  - sudo apt-get -y install tree
+
 before_script:
   - npm install -g @angular/cli
   - export DISPLAY=:99.0
@@ -35,6 +39,7 @@ script:
   - npm install
   - cd ..
   - docker-compose -f docker-compose-test.yml up --exit-code-from backend
+  - tree -puga
 
 cache:
   directories:
