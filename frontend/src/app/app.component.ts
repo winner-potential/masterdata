@@ -1,7 +1,7 @@
 import { Component, Inject } from "@angular/core";
 import { ApiService } from "./api.service";
 import { ActivatedRoute, Router } from "@angular/router";
-import { DOCUMENT } from '@angular/platform-browser';
+import { DOCUMENT } from "@angular/common";
 
 @Component({
   selector: "app-root",

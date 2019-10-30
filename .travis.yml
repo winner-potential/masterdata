@@ -12,24 +12,36 @@ services:
 branches:
   only:
     - master
+    - development
 
 before_script:
   - npm install -g @angular/cli
   - docker pull "$IMAGE_NAME" || true
+  - export DISPLAY=:99.0
+  - sudo systemctl start xvfb
 
 script:
   - cd frontend
   - npm install
   - ng build --prod
+  #- ng test --browsers Firefox
   - cd ..
   - cd readonly
   - npm install
   - ng build --prod
+  #- ng test --browsers Firefox
   - cd ..
   - cd login
   - npm install
   - ng build --prod
+  #- ng test --browsers Firefox
   - cd ..
+  - cd backend
+  - npm install
+  - cd ..
+  - docker-compose -f docker-compose-test.yml up --exit-code-from backend
+  - sudo chown -R $(whoami):$(id -g -n) backend
+  - chmod -R 755 backend
   - docker build --cache-from "${IMAGE_NAME}:latest" -t ${IMAGE_NAME}:latest .
 
 cache:

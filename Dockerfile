@@ -1,11 +1,17 @@
-FROM node:alpine
+FROM node:12.10.0-alpine
 
 # Set work dir
 WORKDIR /var/lib/app/
 
+# Install build dependencies
+RUN apk --no-cache add python make g++
+
 # Copy package.json and install depedencies
 COPY backend/package.json backend/package-lock.json ./
-RUN cd /var/lib/app/ && npm install
+RUN npm install
+
+# Remove build dependencies
+RUN apk update && apk del python make g++
 
 # Copy backend and frontend
 COPY frontend/dist/masterdata ./public/admin

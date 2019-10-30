@@ -26,9 +26,9 @@ export class NavigationComponent {
   private hasDetails: boolean;
   private path: string;
 
-  @ViewChild("searchBox")
+  @ViewChild("searchBox", { static: false })
   searchBox;
-  @ViewChild("detailsDrawer")
+  @ViewChild("detailsDrawer", { static: true })
   detailsDrawer;
 
   isNavigation$: Observable<boolean> = this.breakpointObserver.observe([Breakpoints.Large, Breakpoints.XLarge]).pipe(map(result => result.matches));

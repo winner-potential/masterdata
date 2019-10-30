@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { JwtHelperService } from "@auth0/angular-jwt";
 import { Observable, Subscriber } from "rxjs";
-import { MatDialog } from "@angular/material";
+import { MatDialog } from "@angular/material/dialog";
 import { SessionExpiredComponent, DialogData } from "./session/session-expired/session-expired.component";
 import { Router, ActivatedRoute } from "@angular/router";
 import { LoginService } from "./login.service";

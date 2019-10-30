@@ -87,7 +87,7 @@ export class DocumentDataSource {
   constructor(private treeControl: FlatTreeControl<DocumentNode>, private database: DocumentDatabase) {}
 
   connect(collectionViewer: CollectionViewer): Observable<DocumentNode[]> {
-    this.treeControl.expansionModel.onChange!.subscribe(change => {
+    this.treeControl.expansionModel.changed!.subscribe(change => {
       if ((change as SelectionChange<DocumentNode>).added || (change as SelectionChange<DocumentNode>).removed) {
         this.handleTreeControl(change as SelectionChange<DocumentNode>);
       }
