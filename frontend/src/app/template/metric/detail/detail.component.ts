@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { Router, ActivatedRoute } from "@angular/router";
 import { ApiService } from "../../../api.service";
 import { ActionsService } from "../../../actions.service";
@@ -69,7 +69,7 @@ export class DetailMetricTemplateComponent implements OnInit {
 
   updateAvailableTags() {
     this.tagsAvailable.length = 0;
-    var available: Map<string, any> = new Map<string, any>();
+    let available: Map<string, any> = new Map<string, any>();
 
     // Clone all available tags
     this.tagsData.forEach((element:any, key: string) => {

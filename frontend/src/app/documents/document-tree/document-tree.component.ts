@@ -51,7 +51,7 @@ export class DocumentDatabase {
   }
 
   public get root(): DocumentNode[] {
-    var list: DocumentNode[] = [];
+    let list: DocumentNode[] = [];
     this._root.forEach(el => list.push(el));
     return list;
   }
@@ -155,8 +155,8 @@ export class DocumentTreeComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {
-    var templateMapping = {};
-    var database = new DocumentDatabase();
+    let templateMapping = {};
+    let database = new DocumentDatabase();
     this.treeControl = new FlatTreeControl<DocumentNode>(this.getLevel, this.isExpandable);
     this.dataSource = new DocumentDataSource(this.treeControl, database);
     this.documents.subscribe((documents: Array<any>) => {
@@ -166,8 +166,8 @@ export class DocumentTreeComponent implements OnInit {
         doc.templateData = templateMapping[doc.template];
         database.add(new DocumentNode(doc));
       });
-      var root = database.init();
-      var handleChilds = childs => {
+      let root = database.init();
+      let handleChilds = childs => {
         childs.forEach(el => {
           if (el.open) {
             this.treeControl.expansionModel.select(el);

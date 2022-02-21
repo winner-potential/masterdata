@@ -1,6 +1,5 @@
 import { Directive, Input } from "@angular/core";
 import { NG_VALIDATORS, Validator, AbstractControl, ValidationErrors } from "@angular/forms";
-import { AttributeDefinition } from "../../../model/attribute-definition";
 
 @Directive({
   selector: "[attribute-check]",

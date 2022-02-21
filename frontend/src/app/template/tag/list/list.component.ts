@@ -21,7 +21,7 @@ export class ListTagTemplateComponent implements OnInit {
 
   ngOnInit() {
     this.loading = true;
-    var self = this;
+    let self = this;
     this.actionSubscription = this.actions.events.subscribe(action => {
       if (action == "add") {
         self.add();

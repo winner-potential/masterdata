@@ -81,14 +81,14 @@ export class MetricRelationComponent implements OnInit {
   }
 
   handleSelection(e) {
-    var doc = e.option.value;
+    let doc = e.option.value;
     if(doc._id) {
       this.api.getDocument(doc._id).subscribe(document => {
         this.selectedDocument = document;
         // Check metrics, if there is only one and select this
         if(this.selectedDocument.metrics) {
-          var count = 0;
-          var last;
+          let count = 0;
+          let last;
           this.selectedDocument.metrics.forEach((e:any) => {
             if(e.identifier == this.identifier) {
               count ++;

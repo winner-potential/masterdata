@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
+import { Component, OnInit} from "@angular/core";
 import { Router, ActivatedRoute } from "@angular/router";
 import { ApiService } from "../../../api.service";
 import { ActionsService } from "../../../actions.service";
@@ -6,7 +6,6 @@ import { MatDialog } from "@angular/material/dialog";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { AttributeDefinition } from "../../../model/attribute-definition";
 import { AttributeDefinitions } from "../../../model/attribute-definitions";
-import { SortablejsModule } from "../../../../../node_modules/angular-sortablejs";
 import { ReallyDeleteComponent, ReallyDeleteData } from "src/app/really-delete/really-delete.component";
 
 @Component({
@@ -79,26 +78,26 @@ export class DetailDocumentTemplateComponent implements OnInit {
 
   updateIdentifiers() {
     this.identifiers.length = 0;
-    var handled = {};
+    let handled = {};
 
     this.attributeDefinitions.forEach((attr: AttributeDefinition) => {
       if (!handled[attr.name as string]) {
-        var str: String = attr.name + ": " + attr.type;
+        let str: String = attr.name + ": " + attr.type;
         this.identifiers.push({ full: str, short: attr.name });
         handled[attr.name as string] = true;
       }
     });
 
     if (this.extends) {
-      var map: Map<String, any> = new Map<String, object>();
+      let map: Map<String, any> = new Map<String, object>();
       this.documents.forEach((doc: any) => {
         map.set(doc._id, doc);
       });
-      var current = map.get(this.extends);
+      let current = map.get(this.extends);
       while (current != null) {
         current.attributes.forEach((attr: any) => {
           if (!handled[attr.name]) {
-            var str: String = attr.name + ": " + attr.type;
+            let str: String = attr.name + ": " + attr.type;
             this.identifiers.push({ full: str, short: attr.name });
             handled[attr.name] = true;
           }
@@ -133,7 +132,7 @@ export class DetailDocumentTemplateComponent implements OnInit {
   }
 
   removeAttribute(index: number) {
-    var current: AttributeDefinition = this.attributeDefinitions.remove(index);
+    let current: AttributeDefinition = this.attributeDefinitions.remove(index);
     if (current.name == this.identifier) {
       this.identifier = this.attributeDefinitions.length > 0 ? this.attributeDefinitions.get(0).name : undefined;
     }
@@ -159,7 +158,7 @@ export class DetailDocumentTemplateComponent implements OnInit {
 
   updateAvailableMetrics() {
     this.metricsAvailable.length = 0;
-    var available: Map<string, any> = new Map<string, any>();
+    let available: Map<string, any> = new Map<string, any>();
 
     // Clone all available metrics
     this.metricsData.forEach((element: any, key: string) => {
@@ -193,7 +192,7 @@ export class DetailDocumentTemplateComponent implements OnInit {
       metrics.push(element._id);
     });
 
-    var attributes = [];
+    let attributes = [];
     this.attributeDefinitions.forEach(attr => {
       attributes.push({
         name: attr.name,

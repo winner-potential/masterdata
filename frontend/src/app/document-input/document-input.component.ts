@@ -64,7 +64,7 @@ export class DocumentInputComponent implements OnInit, ControlValueAccessor {
   }
 
   handleSelection(e) {
-    var doc = e.option.value;
+    let doc = e.option.value;
   }
 
   writeValue(obj: string): void {

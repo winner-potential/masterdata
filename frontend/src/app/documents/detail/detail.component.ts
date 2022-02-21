@@ -100,8 +100,8 @@ export class DetailDocumentComponent implements OnInit {
   }
 
   handleDataAttribute(field, data) {
-    var reader = new FileReader();
-    var self = this;
+    let reader = new FileReader();
+    let self = this;
     reader.onload = (event: any) => {
       self.data.set(field.name, event.target.result);
       this.values[field.name] = data.name;
@@ -138,8 +138,8 @@ export class DetailDocumentComponent implements OnInit {
   }
 
   findPosition(current) {
-    var found = false;
-    for (var k = 0; k < this.attributes.length; k++) {
+    let found = false;
+    for (let k = 0; k < this.attributes.length; k++) {
       if (!current) {
         // find position of first separator or end
         if (this.attributes[k].type == "separator") {
@@ -164,13 +164,11 @@ export class DetailDocumentComponent implements OnInit {
     this.attributes.length = 0;
     this.usableMetrics.length = 0;
 
-    var temp: any = this.documentTemplateMap[this.template];
-    var root: any = temp;
-
-    var handledAttributes: Map<string, boolean> = new Map<string, boolean>();
-    var handledMetrics: Map<string, boolean> = new Map<string, boolean>();
+    let temp: any = this.documentTemplateMap[this.template];
+    let handledAttributes: Map<string, boolean> = new Map<string, boolean>();
+    let handledMetrics: Map<string, boolean> = new Map<string, boolean>();
     while (temp) {
-      var current = undefined;
+      let current = undefined;
       // Find attributes this document should define
       (temp.attributes || []).forEach(attr => {
         attr.type = attr.type.toLowerCase();
@@ -205,15 +203,15 @@ export class DetailDocumentComponent implements OnInit {
     }
     this.saving = true;
 
-    var attributes = [];
-    var metrics = [];
-    var relations = [];
+    let attributes = [];
+    let metrics = [];
+    let relations = [];
 
-    var temp: any = this.documentTemplateMap[this.template];
-    var root: any = temp;
+    let temp: any = this.documentTemplateMap[this.template];
+    let root: any = temp;
 
-    var names: Map<string, boolean> = new Map<string, boolean>();
-    var uploadable: Map<string, boolean> = new Map<string, boolean>();
+    let names: Map<string, boolean> = new Map<string, boolean>();
+    let uploadable: Map<string, boolean> = new Map<string, boolean>();
     try {
       while (temp) {
         (temp.attributes || []).forEach(attr => {
@@ -239,7 +237,7 @@ export class DetailDocumentComponent implements OnInit {
 
     // Get all configurated metrics
     this.metrics.forEach(m => {
-      var tags = [];
+      let tags = [];
       m.tags.forEach(tag => {
         tags.push({
           _id: tag.id ? tag.id : undefined,
@@ -267,7 +265,7 @@ export class DetailDocumentComponent implements OnInit {
       });
     });
 
-    var finish = (action, errors) => {
+    let finish = (action, errors) => {
       this.saving = false;
       if (!errors) {
         this.actions.events.emit("close_details");
@@ -284,9 +282,9 @@ export class DetailDocumentComponent implements OnInit {
       }
     };
 
-    var uploadImages = (id, action) => {
-      var count = 0;
-      var errors = false;
+    let uploadImages = (id, action) => {
+      let count = 0;
+      let errors = false;
       attributes.forEach(attr => {
         if (this.data.has(attr.name)) {
           if (uploadable.has(attr.name)) {
@@ -389,19 +387,19 @@ export class DetailDocumentComponent implements OnInit {
           });
 
           (data.metrics || []).forEach(metric => {
-            var m: Metric = new Metric(metric.alias, metric.key, metric.identifier, metric._id);
+            let m: Metric = new Metric(metric.alias, metric.key, metric.identifier, metric._id);
             (metric.tags || []).forEach(tag => {
               m.tags.set(tag.identifier, new Tag(tag.identifier, tag.value, tag._id));
             });
             this.metrics.push(m);
           });
 
-          var n = (a:any) => this.metricTemplates[a.identifier].alias ? this.metricTemplates[a.identifier].alias : this.metricTemplates[a.identifier].name;
+          let n = (a:any) => this.metricTemplates[a.identifier].alias ? this.metricTemplates[a.identifier].alias : this.metricTemplates[a.identifier].name;
 
           this.metrics.sort((a:any, b:any) => n(a) < n(b) ? 1 : -1);
 
           (data.relations || []).forEach(metric => {
-            var m: MetricRelation = new MetricRelation(metric.alias, metric.identifier, metric.link, metric.document, metric._id);
+            let m: MetricRelation = new MetricRelation(metric.alias, metric.identifier, metric.link, metric.document, metric._id);
             this.relations.push(m);
           });
 
@@ -426,7 +424,7 @@ export class DetailDocumentComponent implements OnInit {
     this.parent = undefined;
     this.metrics.length = 0;
     this.relations.length = 0;
-    for (var key in this.values) {
+    for (let key in this.values) {
       delete this.values[key];
     }
   }

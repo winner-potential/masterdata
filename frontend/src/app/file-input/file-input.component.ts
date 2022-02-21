@@ -25,8 +25,8 @@ export class FileInputComponent implements OnInit {
   }
 
   handleUpload(files: FileList) {
-    var path = [];
-    for(var k = 0; k < files.length; k ++) {
+    let path = [];
+    for(let k = 0; k < files.length; k ++) {
       path.push(files.item(k).name);
     }
     this.filename = path.join(', ');

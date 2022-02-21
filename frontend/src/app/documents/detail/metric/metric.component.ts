@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Metric } from '../../../model/metric';
-import { Tag } from '../../../model/tag';
 
 @Component({
   selector: 'document-metric',
