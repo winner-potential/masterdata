@@ -2,8 +2,8 @@ import { Component, OnInit } from "@angular/core";
 import { ApiService } from "../api.service";
 import { ActivatedRoute, Router } from "@angular/router";
 import { ActionsService } from "../actions.service";
-import { BehaviorSubject } from "../../../node_modules/rxjs";
-import { MatSnackBar } from "../../../node_modules/@angular/material";
+import { BehaviorSubject } from "rxjs";
+import { MatSnackBar } from "@angular/material/snack-bar";
 
 export class DocumentAttributeGroup {
   constructor(public attributes: Array<any>, public name: string) {}
