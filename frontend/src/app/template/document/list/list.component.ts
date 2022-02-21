@@ -3,7 +3,7 @@ import { Router } from "@angular/router";
 import { ActionsService } from "../../../actions.service";
 import { ApiService } from "../../../api.service";
 import { Subscription } from "rxjs";
-import { MatSnackBar } from '../../../../../node_modules/@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-list',

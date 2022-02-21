@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, forwardRef } from '@angular/core';
 import { ApiService } from '../api.service';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '../../../node_modules/@angular/forms';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
   selector: 'document-input',

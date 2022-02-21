@@ -1,10 +1,8 @@
 import { Component, OnInit, Injectable, Input, Output, EventEmitter } from "@angular/core";
-import { BehaviorSubject, Observable, merge } from "../../../../node_modules/rxjs";
-import { FlatTreeControl } from "../../../../node_modules/@angular/cdk/tree";
-import { CollectionViewer, SelectionChange } from "../../../../node_modules/@angular/cdk/collections";
-import { map } from "../../../../node_modules/rxjs/operators";
-import { ApiService } from "../../api.service";
-import { MatSnackBar } from "../../../../node_modules/@angular/material";
+import { BehaviorSubject, Observable, merge } from 'rxjs';
+import { FlatTreeControl } from '@angular/cdk/tree';
+import { CollectionViewer, SelectionChange } from '@angular/cdk/collections';
+import { map } from 'rxjs/operators';
 
 /** Flat node with expandable and level information */
 export class DocumentNode {
