@@ -32,7 +32,7 @@ export class ApiService {
   }
 
   resolveMetrics(path: Array<string>) {
-    var base = `${this.api}api/v1.0/metric/resolve`
+    let base = `${this.api}api/v1.0/metric/resolve`;
     path.forEach((p:string) => {
       base += '/' + encodeURI(p);
     })

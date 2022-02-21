@@ -42,10 +42,10 @@ export class DynamicMetricDatabase {
       return;
     }
     // Create document entry
-    var node = new DynamicMetricData(document, true);
+    let node = new DynamicMetricData(document, true);
 
     // Add document to parent list
-    var list: DynamicMetricData[] = this.childs.get(document.parent) || [];
+    let list: DynamicMetricData[] = this.childs.get(document.parent) || [];
     list.unshift(node);
     this.childs.set(document.parent, list);
 
@@ -53,9 +53,9 @@ export class DynamicMetricDatabase {
     this.nodes.set(document._id, node);
 
     // Catch metrics and relations to create childs for document
-    var childs: DynamicMetricData[] = this.childs.get(document._id) || [];
+    let childs: DynamicMetricData[] = this.childs.get(document._id) || [];
     (document.relations || []).forEach(relation => {
-      var names: any = this.naming(relation.identifier);
+      let names: any = this.naming(relation.identifier);
       if (names) {
         childs.push(new DynamicMetricData(relation, false));
         relation.name = names.name;
@@ -65,7 +65,7 @@ export class DynamicMetricDatabase {
       }
     });
     (document.metrics || []).forEach(metric => {
-      var names: any = this.naming(metric.identifier);
+      let names: any = this.naming(metric.identifier);
       if (names) {
         childs.push(new DynamicMetricData(metric, false));
         metric.name = names.name;
@@ -151,7 +151,7 @@ export class DynamicMetricDataSource {
       const children = this.database.getChildren(node.item);
       node.isLoading = true;
       children.subscribe(childs => {
-        var list = [];
+        let list = [];
         childs.forEach(element => {
           list.push(element.asNode(node.level + 1));
         });
@@ -188,21 +188,21 @@ export class TreeComponent implements OnInit {
   constructor(private api: ApiService, public snackBar: MatSnackBar) {}
 
   ngOnInit() {
-    var metricMapping = {};
-    var documentMapping = {};
-    var database = new DynamicMetricDatabase(
-      (id: string) => {
-        return metricMapping[id] && metricMapping[id].public
-          ? {
-              name: metricMapping[id].alias ? metricMapping[id].alias : metricMapping[id].name,
-              description: metricMapping[id].description,
-              unit: metricMapping[id].unit
-            }
-          : undefined;
-      },
-      (id: string) => {
-        return (this.api.getChildDocuments(id) as Observable<Object[]>).pipe(map(data => data.filter((v: any) => documentMapping[v.template].public)));
-      }
+    let metricMapping = {};
+    let documentMapping = {};
+    let database = new DynamicMetricDatabase(
+        (id: string) => {
+          return metricMapping[id] && metricMapping[id].public
+              ? {
+                name: metricMapping[id].alias ? metricMapping[id].alias : metricMapping[id].name,
+                description: metricMapping[id].description,
+                unit: metricMapping[id].unit
+              }
+              : undefined;
+        },
+        (id: string) => {
+          return (this.api.getChildDocuments(id) as Observable<Object[]>).pipe(map(data => data.filter((v: any) => documentMapping[v.template].public)));
+        }
     );
     this.treeControl = new FlatTreeControl<DynamicMetricNode>(this.getLevel, this.isExpandable);
     this.dataSource = new DynamicMetricDataSource(this.treeControl, database);
@@ -217,7 +217,7 @@ export class TreeComponent implements OnInit {
         this.document.subscribe(newDocument => {
           if (newDocument) {
             database.init(newDocument).subscribe(childs => {
-              var list = [];
+              let list = [];
               childs.forEach(element => {
                 list.push(element.asNode(0));
               });

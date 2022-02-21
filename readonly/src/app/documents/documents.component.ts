@@ -57,7 +57,7 @@ export class DocumentsComponent implements OnInit {
 
   typeName(id: string) {
     if (this.templates) {
-      var temp: any = this.templates.get(id) as any;
+      let temp: any = this.templates.get(id) as any;
       if(temp)
         return temp.alias ? temp.alias : temp.name;
     }
@@ -71,7 +71,7 @@ export class DocumentsComponent implements OnInit {
   import(documents: Array<object>) {
     this.loading = false;
     documents.forEach((doc: any) => {
-      var template: any = this.templates.get(doc.template);
+      let template: any = this.templates.get(doc.template);
       if (template && template.public) {
         if (!this.type || this.type == doc.template) {
           this.documents.push(doc);
@@ -91,7 +91,7 @@ export class DocumentsComponent implements OnInit {
       this.actions.events.emit("open_details");
       this.lastId = id;
 
-      var primary: Array<String> = ["document-list"];
+      let primary: Array<String> = ["document-list"];
       if (this.type) {
         primary = ["document-list-filtered", this.type];
       }
