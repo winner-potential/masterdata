@@ -23,6 +23,7 @@
     "@angular/router": "^10.2.5",
     "@auth0/angular-jwt": "^3.0.0",
     "core-js": "^2.5.4",
+    "ngx-sortablejs": "^10.1.0",
     "rxjs": "^6.5.3",
     "sortablejs": "^1.7.0",
     "zone.js": "^0.10.3"
@@ -35,6 +36,7 @@
     "@types/jasmine": "~2.8.6",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "~8.9.4",
+    "@types/sortablejs": "^1.10.7",
     "codelyzer": "^6.0.2",
     "jasmine-core": "~2.99.1",
     "jasmine-spec-reporter": "~4.2.1",
