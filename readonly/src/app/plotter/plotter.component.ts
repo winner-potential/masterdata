@@ -1,21 +1,20 @@
 import { Component, OnInit } from "@angular/core";
-import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { ApiService } from "../api.service";
 import { ActivatedRoute } from "@angular/router";
 
 function djb2(str) {
-  var hash = 5381;
-  for (var i = 0; i < str.length; i++) {
+  let hash = 5381;
+  for (let i = 0; i < str.length; i++) {
     hash = (hash << 5) + hash + str.charCodeAt(i); /* hash * 33 + c */
   }
   return hash;
 }
 
 function hashStringToColor(str) {
-  var hash = djb2(str);
-  var r = (hash & 0xff0000) >> 16;
-  var g = (hash & 0x00ff00) >> 8;
-  var b = hash & 0x0000ff;
+  let hash = djb2(str);
+  let r = (hash & 0xff0000) >> 16;
+  let g = (hash & 0x00ff00) >> 8;
+  let b = hash & 0x0000ff;
   return "rgb(" + r + "," + g + "," + b + ")";
 }
 
@@ -45,16 +44,16 @@ export class PlotterComponent implements OnInit {
   now(n: number): Date {
     // There are multiple calls on getters, if values change between lifecycle steps, exception might be thrown!
     // Setting seconds and milliseconds to zero helps to reduce this error; however, buffering the value might be better :)
-    var now = new Date(new Date().getTime() - n);
+    let now = new Date(new Date().getTime() - n);
     now.setSeconds(0);
     now.setMilliseconds(0);
     return now;
   }
 
   get startDate(): string {
-    var v = this._startDate;
+    let v = this._startDate;
     if (!v) {
-      var value = window.sessionStorage.getItem("plotter_startDate");
+      let value = window.sessionStorage.getItem("plotter_startDate");
       if (value) {
         v = value;
       }
@@ -89,9 +88,9 @@ export class PlotterComponent implements OnInit {
   }
 
   get endDate(): string {
-    var v = this._endDate;
+    let v = this._endDate;
     if (!v) {
-      var value = window.sessionStorage.getItem("plotter_endDate");
+      let value = window.sessionStorage.getItem("plotter_endDate");
       if (value) {
         v = value;
       }
@@ -128,7 +127,7 @@ export class PlotterComponent implements OnInit {
   constructor(private active: ActivatedRoute, private api: ApiService) {}
 
   loadSetting(name) {
-    var res = window.sessionStorage.getItem(name);
+    let res = window.sessionStorage.getItem(name);
     if (res) return JSON.parse(res);
     return [];
   }
@@ -138,8 +137,8 @@ export class PlotterComponent implements OnInit {
   }
 
   clearYAxis() {
-    var current = "yaxis";
-    var count = 1;
+    let current = "yaxis";
+    let count = 1;
     while (this.graph.layout[current]) {
       this.graph.layout[current] = {};
       count++;
@@ -150,15 +149,15 @@ export class PlotterComponent implements OnInit {
   }
 
   getOrCreateYAxis(name: string, alias: string, unit: string) {
-    var id = name + "_" + unit;
+    let id = name + "_" + unit;
     if (this.yaxis[id]) {
       return this.yaxis[id];
     }
 
-    var shift = 0.07;
-    var position = shift * (this.yaxisCount - 1);
-    var current = "yaxis" + (this.yaxisCount != 1 ? this.yaxisCount : "");
-    var short = "y" + (this.yaxisCount != 1 ? this.yaxisCount : "");
+    let shift = 0.07;
+    let position = shift * (this.yaxisCount - 1);
+    let current = "yaxis" + (this.yaxisCount != 1 ? this.yaxisCount : "");
+    let short = "y" + (this.yaxisCount != 1 ? this.yaxisCount : "");
 
     this.yaxisCount++;
 
@@ -178,9 +177,9 @@ export class PlotterComponent implements OnInit {
   ngOnInit() {
     this.active.params.subscribe(value => {
       setTimeout(_ => {
-        var show = this.loadSetting("current");
+        let show = this.loadSetting("current");
         if (value.id) {
-          var found = false;
+          let found = false;
           show.forEach(e => {
             if (e.id == value.id) {
               found = true;
@@ -200,8 +199,8 @@ export class PlotterComponent implements OnInit {
   }
 
   remove(id: string) {
-    var show = this.loadSetting("current");
-    var replace = [];
+    let show = this.loadSetting("current");
+    let replace = [];
     show.forEach(e => {
       if (e.id != id) {
         replace.push(e);
@@ -212,7 +211,7 @@ export class PlotterComponent implements OnInit {
   }
 
   get start(): Date {
-    var d = new Date(this.startDate);
+    let d = new Date(this.startDate);
     d.setHours(this.startHour);
     d.setMinutes(this.startMinute);
     d.setSeconds(0);
@@ -220,7 +219,7 @@ export class PlotterComponent implements OnInit {
   }
 
   get end(): Date {
-    var d = new Date(this.endDate);
+    let d = new Date(this.endDate);
     d.setHours(this.endHour);
     d.setMinutes(this.endMinute);
     d.setSeconds(0);
@@ -228,9 +227,9 @@ export class PlotterComponent implements OnInit {
   }
 
   swap() {
-    var fooDate = this.startDate;
-    var fooHour = this.startHour;
-    var fooMinute = this.startMinute;
+    let fooDate = this.startDate;
+    let fooHour = this.startHour;
+    let fooMinute = this.startMinute;
     this.startDate = this.endDate;
     this.startHour = this.endHour;
     this.startMinute = this.endMinute;
@@ -240,8 +239,8 @@ export class PlotterComponent implements OnInit {
   }
 
   rename() {
-    var names = {};
-    var map = {};
+    let names = {};
+    let map = {};
     this.timeseries.sort((a, b) => {
       return a.id < b.id ? -1 : 1;
     });
@@ -249,9 +248,9 @@ export class PlotterComponent implements OnInit {
       names[v.name] = (names[v.name] || 0) + 1;
       map[v.id] = v;
     });
-    var nrs = {};
+    let nrs = {};
     this.graph.data.forEach(v => {
-      var add = "";
+      let add = "";
       if (names[v.original.name] > 1) {
         nrs[v.original.name] = (nrs[v.original.name] || 0) + 1;
         add = " (" + nrs[v.original.name] + ")";
@@ -274,15 +273,15 @@ export class PlotterComponent implements OnInit {
     this.graph.data.length = 0;
     this.timeseries.length = 0;
     this.clearYAxis();
-    var show = this.loadSetting("current");
+    let show = this.loadSetting("current");
     show.forEach(e => {
-      var req;
+      let req;
       if (e.type == "source") {
         req = this.api.queryMetric(e.id, this.start.getTime(), this.end.getTime());
       } else {
         req = this.api.queryRelation(e.id, this.start.getTime(), this.end.getTime());
       }
-      var timeseriesInformation = {
+      let timeseriesInformation = {
         id: e.id,
         name: "Timeseries " + e.id.substr(-5) + " loading",
         loading: true,
@@ -293,28 +292,28 @@ export class PlotterComponent implements OnInit {
       this.timeseries.push(timeseriesInformation);
 
       req.subscribe((data: any) => {
-        var information = data.metric || data.relation;
-        var x = [];
-        var y = [];
+        let information = data.metric || data.relation;
+        let x = [];
+        let y = [];
         (data.values as Array<Array<number>>).forEach(e => {
-          var d = new Date(e[0]);
-          var datestring =
-            ("0" + d.getDate()).slice(-2) +
-            "-" +
-            ("0" + (d.getMonth() + 1)).slice(-2) +
-            "-" +
-            d.getFullYear() +
-            " " +
-            ("0" + d.getHours()).slice(-2) +
-            ":" +
-            ("0" + d.getMinutes()).slice(-2) +
-            ":" +
-            ("0" + d.getSeconds()).slice(-2);
+          let d = new Date(e[0]);
+          let datestring =
+              ("0" + d.getDate()).slice(-2) +
+              "-" +
+              ("0" + (d.getMonth() + 1)).slice(-2) +
+              "-" +
+              d.getFullYear() +
+              " " +
+              ("0" + d.getHours()).slice(-2) +
+              ":" +
+              ("0" + d.getMinutes()).slice(-2) +
+              ":" +
+              ("0" + d.getSeconds()).slice(-2);
 
           x.push(d);
           y.push(e[1]);
         });
-        var plot = {
+        let plot = {
           x: x,
           y: y,
           original: {
@@ -325,7 +324,7 @@ export class PlotterComponent implements OnInit {
           type: "scatter",
           mode: "lines+points",
           yaxis: this.getOrCreateYAxis(information.name, information.alias, information.unit),
-          marker: { color: hashStringToColor(e.id as string) }
+          marker: {color: hashStringToColor(e.id as string)}
         };
         timeseriesInformation.name = data.name;
         timeseriesInformation.metric = information;

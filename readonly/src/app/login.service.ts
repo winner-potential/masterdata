@@ -11,20 +11,20 @@ export class LoginService {
   constructor() { }
 
   public goTo(segments: Array<UrlSegment>) {
-    var base = document.getElementsByTagName('base')[0]
-    var basePath: string;
+    let base = document.getElementsByTagName("base")[0];
+    let basePath: string;
     if(base) {
       basePath = base.getAttribute('href')
     }
-    var origin = basePath.startsWith('http') ? basePath : (document.location.origin + basePath);
+    let origin = basePath.startsWith("http") ? basePath : (document.location.origin + basePath);
     segments.forEach(seg => {
       if(!origin.endsWith('/'))
         origin += '/'
       origin += seg.toString()
     })
-    var loginOrigin = (window as any).login || environment.login;
+    let loginOrigin = (window as any).login || environment.login;
     loginOrigin = loginOrigin.startsWith('http') ? loginOrigin : (document.location.origin + loginOrigin);
-    var target = new URL(loginOrigin);
+    let target = new URL(loginOrigin);
     if(target.searchParams) {
       target.searchParams.set('origin', origin);
       window.location.href = target.toString();

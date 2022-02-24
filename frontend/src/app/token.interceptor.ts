@@ -15,8 +15,8 @@ export class TokenInterceptor implements HttpInterceptor {
     });
     return next.handle(req).pipe(tap(ev => {
       if(ev instanceof HttpResponse) {
-        var res = ev as HttpResponse<any>;
-        var token = res.headers.get("X-Access-Token");
+        let res = ev as HttpResponse<any>;
+        let token = res.headers.get('X-Access-Token');
         if(token) {
           this.auth.token = token;
         }

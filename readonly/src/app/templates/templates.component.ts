@@ -1,9 +1,8 @@
 import { Component, OnInit } from "@angular/core";
-import { Observable } from "../../../node_modules/rxjs";
+import { Observable } from "rxjs";
 import { BreakpointObserver, Breakpoints } from "@angular/cdk/layout";
-import { map, tap } from "../../../node_modules/rxjs/operators";
 import { ApiService } from "../api.service";
-import { Router } from "../../../node_modules/@angular/router";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-templates",

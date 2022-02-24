@@ -3,7 +3,7 @@ import { Router } from "@angular/router";
 import { ActionsService } from "../../../actions.service";
 import { ApiService } from "../../../api.service";
 import { Subscription } from "rxjs";
-import { MatSnackBar } from '../../../../../node_modules/@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-list',
@@ -22,7 +22,7 @@ export class ListDocumentTemplateComponent implements OnInit {
 
   ngOnInit() {
     this.loading = true;
-    var self = this;
+    let self = this;
     this.actionSubscription = this.actions.events.subscribe(action => {
       if (action == "add") {
         self.add();

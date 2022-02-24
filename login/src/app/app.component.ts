@@ -31,7 +31,7 @@ export class AppComponent {
     this.saving = true;
     this.error = undefined;
     this.api.login(this.username, this.password).subscribe((res:any) => {
-      var origin = new URL(decodeURIComponent(this.origin));
+      let origin = new URL(decodeURIComponent(this.origin));
       if(origin.searchParams) {
         origin.searchParams.set('token', res.token);
         window.location.href = origin.toString();

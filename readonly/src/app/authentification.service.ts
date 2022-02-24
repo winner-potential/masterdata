@@ -1,8 +1,8 @@
 import { Injectable } from "@angular/core";
 import { JwtHelperService } from "@auth0/angular-jwt";
 import { Observable, Subscriber } from "rxjs";
-import { MatDialog } from "../../node_modules/@angular/material";
-import { Router, ActivatedRoute } from "../../node_modules/@angular/router";
+import { MatDialog } from "@angular/material/dialog";
+import { Router, ActivatedRoute } from "@angular/router";
 import { LoginService } from "./login.service";
 import { SessionExpiredComponent, DialogData } from "./session/session-expired/session-expired.component";
 
@@ -16,13 +16,13 @@ export class AuthentificationService {
   private _waiter: Array<Subscriber<any>> = [];
 
   constructor(public dialog: MatDialog, private router: Router, private activated: ActivatedRoute, private login: LoginService) {
-    var self = this;
-    var dialogIsOpen;
+    let self = this;
+    let dialogIsOpen;
     window.setInterval(() => {
       if (dialogIsOpen) {
         return;
       }
-      var token = self.token;
+      let token = self.token;
       if (token) {
         const helper = new JwtHelperService();
         const isExpired = helper.isTokenExpired(token);
@@ -33,7 +33,7 @@ export class AuthentificationService {
             data: new DialogData()
           });
 
-          dialogRef.afterClosed().subscribe(result => {
+          dialogRef.afterClosed().subscribe(() => {
             dialogIsOpen = false;
             activated.url.subscribe(url => this.login.goTo(url));
           });
@@ -61,7 +61,7 @@ export class AuthentificationService {
   }
 
   restoreToken() {
-    var token = window.sessionStorage.getItem("token");
+    let token = window.sessionStorage.getItem("token");
     if (token) {
       this.token = token;
     }

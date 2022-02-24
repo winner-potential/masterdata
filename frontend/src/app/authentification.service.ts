@@ -16,13 +16,13 @@ export class AuthentificationService {
   private _waiter: Array<Subscriber<any>> = [];
 
   constructor(public dialog: MatDialog, private router: Router, private activated: ActivatedRoute, private login: LoginService) {
-    var self = this;
-    var dialogIsOpen;
+    let self = this;
+    let dialogIsOpen;
     window.setInterval(() => {
       if (dialogIsOpen) {
         return;
       }
-      var token = self.token;
+      let token = self.token;
       if (token) {
         const helper = new JwtHelperService();
         const isExpired = helper.isTokenExpired(token);
@@ -33,7 +33,7 @@ export class AuthentificationService {
             data: new DialogData()
           });
 
-          dialogRef.afterClosed().subscribe(result => {
+          dialogRef.afterClosed().subscribe(() => {
             dialogIsOpen = false;
             activated.url.subscribe(url => this.login.goTo(url));
           });
@@ -60,7 +60,7 @@ export class AuthentificationService {
   }
 
   restoreToken() {
-    var token = window.sessionStorage.getItem("token");
+    let token = window.sessionStorage.getItem("token");
     if (token) {
       this.token = token;
     }

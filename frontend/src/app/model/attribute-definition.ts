@@ -50,7 +50,7 @@ export class AttributeDefinition {
 
   public nameIsUnique(newName : String) : Boolean {
     newName = newName || "";
-    var nameNotUnique = false;
+    let nameNotUnique = false;
     if(this._parent) {
       this._parent.forEach((attr:AttributeDefinition) => {
         if(attr == this) {

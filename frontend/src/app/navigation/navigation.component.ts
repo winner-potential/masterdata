@@ -33,8 +33,8 @@ export class NavigationComponent {
   constructor(private breakpointObserver: BreakpointObserver, private router: Router, private actionsService: ActionsService, private auth: AuthentificationService) {}
 
   ngOnInit() {
-    var firstRun = true;
-    var self = this;
+    let firstRun = true;
+    let self = this;
     this.actionsService.events.subscribe(action => {
       if (action == "open_details") {
         this.detailsDrawer.open();

@@ -46,7 +46,7 @@ export class NavigationComponent {
 
   toggleSearch() {
     this.searchMode = !this.searchMode;
-    var self = this;
+    let self = this;
     window.setTimeout(function() {
       if (self.searchMode) {
         self.searchBox.nativeElement.focus();
@@ -63,7 +63,7 @@ export class NavigationComponent {
   }
 
   ngOnInit() {
-    var firstRun = true;
+    let firstRun = true;
     this.actionsService.events.subscribe(action => {
       if (action == "open_details") {
         this.detailsDrawer.open();
@@ -106,10 +106,10 @@ export class NavigationComponent {
     });
     // we should wait on cylce to carefully finish init
     window.setTimeout(() => {
-      var counts: Map<string, number> = new Map<string, number>();
+      let counts: Map<string, number> = new Map<string, number>();
       this.api.getDocumentTemplates().subscribe((data: any) => {
         this.templates.length = 0;
-        var templates : Map<string, boolean> = new Map<string, boolean>();
+        let templates: Map<string, boolean> = new Map<string, boolean>();
         if (data && data.length) {
           data.forEach((d: any) => templates.set(d._id, d.public));
         }
@@ -143,7 +143,7 @@ export class NavigationComponent {
 
   handleSearch(e) {
     if (e && e.target && e.target.value) {
-      var search = e.target.value;
+      let search = e.target.value;
       this.search = {
         name: search
       };
@@ -168,7 +168,7 @@ export class NavigationComponent {
   }
 
   parse(list: Array<string>, params: any) {
-    var res = [];
+    let res = [];
     list.forEach(entry => {
       if (entry.startsWith(":")) {
         entry = params[entry.substr(1)];
@@ -186,7 +186,7 @@ export class NavigationComponent {
 
     this.toggleSearch();
     this.actionsService.events.emit("open_details");
-    var outlets = {
+    let outlets = {
       primary: this.parse(this.searchConfig.list, this.params).concat([this.search.name])
     };
     if (this.search._id) {

@@ -42,7 +42,7 @@ export class AttributeDefinitions implements Iterable<AttributeDefinition> {
   }
 
   public remove(index: number) {
-    var current = this.definitions[index];
+    let current = this.definitions[index];
     this.definitions.splice(index, 1);
     return current;
   }

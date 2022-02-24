@@ -59,14 +59,14 @@ import { SessionExpiredComponent } from './session/session-expired/session-expir
 import { TemplatesComponent } from './templates/templates.component';
 import { PlotterComponent } from './plotter/plotter.component';
 
-var searchDocument = function(api: ApiService, search: string, params: any) {
+let searchDocument = function (api: ApiService, search: string, params: any) {
   return new Observable(observer => {
-    var type = params.type;
+    let type = params.type;
     api.getDocumentTemplates().subscribe((templates: Array<object>) => {
-      var temps = {};
+      let temps = {};
       templates.forEach((t: any) => (temps[t._id] = t));
       api.findDocuments(search).subscribe((data: Array<object>) => {
-        var res: Array<object> = [];
+        let res: Array<object> = [];
         data.forEach((d: any) => {
           if (temps[d.template].public) {
             if (!type || d.template == type) {
@@ -80,13 +80,13 @@ var searchDocument = function(api: ApiService, search: string, params: any) {
   });
 };
 
-var documentSearch = {
+let documentSearch = {
   list: ["document-list"],
   details: ["document-show"],
   find: searchDocument
 };
 
-var filteredDocumentSearch = {
+let filteredDocumentSearch = {
   list: ["document-list-filtered", ":type"],
   details: ["document-show"],
   find: searchDocument
