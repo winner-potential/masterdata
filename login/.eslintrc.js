@@ -128,13 +128,16 @@ module.exports = {
         "no-use-before-define": "error",
         "no-var": "error",
         "prefer-const": "error",
-        "quotes": "error",
+        "quotes": ["error", "single"],
         "radix": "error",
         "semi": "error",
         "spaced-comment": [
             "error",
             "always",
             {
+                "exceptions": [
+                    "*"
+                ],
                 "markers": [
                     "/"
                 ]

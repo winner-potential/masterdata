@@ -1,20 +1,21 @@
-import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
-import { environment } from "../environments/environment";
+import { environment } from '../environments/environment';
 
 @Injectable({
-  providedIn: "root"
+    providedIn: 'root'
 })
 export class ApiService {
-  api = (window as any).api || environment.api;
+    api = (window as any).api || environment.api;
 
-  constructor(private httpClient: HttpClient) {}
+    constructor(private httpClient: HttpClient) {
+    }
 
-  login(username: String, password: String) {
-    return this.httpClient.post(`${this.api}api/v1.0/authentificate/`, {
-      username: username,
-      password: password
-    });
-  }
+    login(username: String, password: String) {
+        return this.httpClient.post(`${this.api}api/v1.0/authentificate/`, {
+            username: username,
+            password: password
+        });
+    }
 }
