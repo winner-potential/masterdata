@@ -41,7 +41,10 @@ module.exports = {
                 }
             }
         ],
-        "@typescript-eslint/member-ordering": "error",
+        // there seems to be a rationale for the ordering to be the way it is in most places,
+        // also fixing everything up seems a bit too tedious for now.
+        // only enable this when you're brave and have enough time
+        // "@typescript-eslint/member-ordering": "error",
         "@typescript-eslint/naming-convention": "error",
         "@typescript-eslint/no-empty-function": "off",
         "@typescript-eslint/no-empty-interface": "error",
