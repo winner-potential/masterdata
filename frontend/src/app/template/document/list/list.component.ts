@@ -24,11 +24,11 @@ export class ListDocumentTemplateComponent implements OnInit {
         this.loading = true;
         const self = this;
         this.actionSubscription = this.actions.events.subscribe(action => {
-            if (action == 'add') {
+            if (action === 'add') {
                 self.add();
-            } else if (action == 'close_details') {
+            } else if (action === 'close_details') {
                 self.lastId = null;
-            } else if (action == 'saved' || action == 'deleted') {
+            } else if (action === 'saved' || action === 'deleted') {
                 self.getDocuments();
             } else if (action.startsWith('show')) {
                 this.lastId = action.split('#')[1];
@@ -38,7 +38,7 @@ export class ListDocumentTemplateComponent implements OnInit {
     }
 
     isSelected(id: String) {
-        return this.lastId == id;
+        return this.lastId === id;
     }
 
     getDocuments() {
@@ -62,7 +62,7 @@ export class ListDocumentTemplateComponent implements OnInit {
     }
 
     details(id: String) {
-        if (this.lastId == id) {
+        if (this.lastId === id) {
             this.lastId = null;
             this.actions.events.emit('close_details');
         } else {

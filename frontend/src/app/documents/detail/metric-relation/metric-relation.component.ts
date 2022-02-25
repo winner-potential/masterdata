@@ -89,12 +89,12 @@ export class MetricRelationComponent implements OnInit {
                     let count = 0;
                     let last;
                     this.selectedDocument.metrics.forEach((e: any) => {
-                        if (e.identifier == this.identifier) {
+                        if (e.identifier === this.identifier) {
                             count++;
                             last = e._id;
                         }
                     });
-                    if (count == 1) {
+                    if (count === 1) {
                         this.link = last;
                     }
                 }

@@ -56,10 +56,10 @@ export class AttributeDefinition {
         let nameNotUnique = false;
         if (this._parent) {
             this._parent.forEach((attr: AttributeDefinition) => {
-                if (attr == this) {
+                if (attr === this) {
                     return;
                 }
-                if (attr.name.toLowerCase() == newName.toLowerCase()) {
+                if (attr.name.toLowerCase() === newName.toLowerCase()) {
                     nameNotUnique = true;
                 }
             });

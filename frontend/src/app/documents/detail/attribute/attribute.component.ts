@@ -38,11 +38,11 @@ export class DocumentAttributeComponent implements OnInit, ControlValueAccessor 
 
     ngOnInit() {
         this.type = this.type.toLowerCase();
-        if (this.type == 'integer') {
+        if (this.type === 'integer') {
             this.config = new AttributeCheckConfiguration(false, true, this.required);
-        } else if (this.type == 'number') {
+        } else if (this.type === 'number') {
             this.config = new AttributeCheckConfiguration(true, false, this.required);
-        } else if (this.type == 'separator') {
+        } else if (this.type === 'separator') {
             this.config = new AttributeCheckConfiguration(false, false, false);
         } else {
             this.config = new AttributeCheckConfiguration(false, false, this.required);

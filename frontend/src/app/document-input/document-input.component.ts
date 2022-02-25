@@ -42,7 +42,7 @@ export class DocumentInputComponent implements OnInit, ControlValueAccessor {
     }
 
     ngOnInit() {
-        this.required = this._required == '';
+        this.required = this._required === '';
     }
 
     handleDocument(e) {

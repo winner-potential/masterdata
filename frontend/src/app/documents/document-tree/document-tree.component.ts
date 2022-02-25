@@ -9,7 +9,7 @@ export class DocumentNode {
     constructor(public item: any, public level = 1, public expandable = false, public isLoading = false) {}
 
     get open(): boolean {
-        return window.sessionStorage.getItem('document-' + this.item._id) == 'open';
+        return window.sessionStorage.getItem('document-' + this.item._id) === 'open';
     }
 
     set open(val: boolean) {
@@ -134,7 +134,7 @@ export class DocumentDataSource {
     }
 
     public empty(): boolean {
-        return !this.dataChange.value || this.dataChange.value.length == 0;
+        return !this.dataChange.value || this.dataChange.value.length === 0;
     }
 }
 
@@ -182,7 +182,7 @@ export class DocumentTreeComponent implements OnInit {
 
     isSelected(id: String) {
         return this.selection.pipe(
-            map(value => id == value)
+            map(value => id === value)
         );
     }
 

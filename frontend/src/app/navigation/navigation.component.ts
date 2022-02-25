@@ -33,11 +33,11 @@ export class NavigationComponent {
         let firstRun = true;
         const self = this;
         this.actionsService.events.subscribe(action => {
-            if (action == 'open_details') {
+            if (action === 'open_details') {
                 this.detailsDrawer.open();
                 this.details = true;
             }
-            if (action == 'close_details') {
+            if (action === 'close_details') {
                 this.detailsDrawer.close();
                 this.details = false;
             }
@@ -51,7 +51,7 @@ export class NavigationComponent {
                     this.detailsDrawer.close();
                 }
             } else if (event instanceof ActivationStart) {
-                if (event.snapshot.outlet == 'primary') {
+                if (event.snapshot.outlet === 'primary') {
                     this.title = event.snapshot.data.title;
                     this.path = event.snapshot.routeConfig.path;
                     this.fab = null;
@@ -63,7 +63,7 @@ export class NavigationComponent {
                             }
                         };
                     }
-                } else if (event.snapshot.outlet == 'details') {
+                } else if (event.snapshot.outlet === 'details') {
                     this.hasDetails = true;
                     if (firstRun) {
                         this.actionsService.events.emit('open_details');
@@ -83,7 +83,7 @@ export class NavigationComponent {
     }
 
     isSelected(path: string) {
-        return this.path == path;
+        return this.path === path;
     }
 
     closeDetails() {

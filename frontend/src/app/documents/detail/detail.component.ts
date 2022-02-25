@@ -143,16 +143,16 @@ export class DetailDocumentComponent implements OnInit {
         for (let k = 0; k < this.attributes.length; k++) {
             if (!current) {
                 // find position of first separator or end
-                if (this.attributes[k].type == 'separator') {
+                if (this.attributes[k].type === 'separator') {
                     return k;
                 }
             } else {
                 if (!found) {
-                    if (this.attributes[k].name == current) {
+                    if (this.attributes[k].name === current) {
                         found = true;
                     }
                 } else {
-                    if (this.attributes[k].type == 'separator') {
+                    if (this.attributes[k].type === 'separator') {
                         return k;
                     }
                 }
@@ -177,7 +177,7 @@ export class DetailDocumentComponent implements OnInit {
                     this.attributes.splice(this.findPosition(current), 0, attr);
                     handledAttributes.set(attr.name, true);
                 }
-                if (attr.type == 'separator') {
+                if (attr.type === 'separator') {
                     current = attr.name;
                 }
             });
@@ -219,12 +219,12 @@ export class DetailDocumentComponent implements OnInit {
                     if (names.has(attr.name)) {
                         return;
                     }
-                    if ((attr.should || root.identifier == attr.name) && !this.values[attr.name]) {
+                    if ((attr.should || root.identifier === attr.name) && !this.values[attr.name]) {
                         throw 'Missing required attribute ' + attr.name;
                     }
-                    names.set(attr.name, attr.should || root.identifier == attr.name);
+                    names.set(attr.name, attr.should || root.identifier === attr.name);
                     attributes.push({name: attr.name, value: this.values[attr.name]});
-                    uploadable.set(attr.name, attr.type.toLowerCase() == 'image');
+                    uploadable.set(attr.name, attr.type.toLowerCase() === 'image');
                 });
                 if (temp.extends) {
                     temp = this.documentTemplateMap[temp.extends];
@@ -446,9 +446,9 @@ export class DetailDocumentComponent implements OnInit {
 
         dialogRef.afterClosed().subscribe(result => {
             if (result) {
-                if (result.type == 'source') {
+                if (result.type === 'source') {
                     this.handleAddSourceMetric(result.selection);
-                } else if (result.type == 'relation') {
+                } else if (result.type === 'relation') {
                     this.handleAddDestinationMetric(result.selection);
                 }
             }

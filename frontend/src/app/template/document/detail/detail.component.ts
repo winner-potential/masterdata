@@ -18,7 +18,7 @@ export class DetailDocumentTemplateComponent implements OnInit {
     public name: String = '';
     public description: String = '';
     public alias: String = '';
-    public isPublic: boolean = false;
+    public isPublic = false;
     public extends: String = '';
     public identifier: String = '';
     public newMetric: String = '';
@@ -78,18 +78,18 @@ export class DetailDocumentTemplateComponent implements OnInit {
 
     updateIdentifiers() {
         this.identifiers.length = 0;
-        let handled = {};
+        const handled = {};
 
         this.attributeDefinitions.forEach((attr: AttributeDefinition) => {
             if (!handled[attr.name as string]) {
-                let str: String = attr.name + ': ' + attr.type;
+                const str: String = attr.name + ': ' + attr.type;
                 this.identifiers.push({full: str, short: attr.name});
                 handled[attr.name as string] = true;
             }
         });
 
         if (this.extends) {
-            let map: Map<String, any> = new Map<String, object>();
+            const map: Map<String, any> = new Map<String, object>();
             this.documents.forEach((doc: any) => {
                 map.set(doc._id, doc);
             });
@@ -97,7 +97,7 @@ export class DetailDocumentTemplateComponent implements OnInit {
             while (current != null) {
                 current.attributes.forEach((attr: any) => {
                     if (!handled[attr.name]) {
-                        let str: String = attr.name + ': ' + attr.type;
+                        const str: String = attr.name + ': ' + attr.type;
                         this.identifiers.push({full: str, short: attr.name});
                         handled[attr.name] = true;
                     }
@@ -132,8 +132,8 @@ export class DetailDocumentTemplateComponent implements OnInit {
     }
 
     removeAttribute(index: number) {
-        let current: AttributeDefinition = this.attributeDefinitions.remove(index);
-        if (current.name == this.identifier) {
+        const current: AttributeDefinition = this.attributeDefinitions.remove(index);
+        if (current.name === this.identifier) {
             this.identifier = this.attributeDefinitions.length > 0 ? this.attributeDefinitions.get(0).name : undefined;
         }
     }
@@ -158,7 +158,7 @@ export class DetailDocumentTemplateComponent implements OnInit {
 
     updateAvailableMetrics() {
         this.metricsAvailable.length = 0;
-        let available: Map<string, any> = new Map<string, any>();
+        const available: Map<string, any> = new Map<string, any>();
 
         // Clone all available metrics
         this.metricsData.forEach((element: any, key: string) => {
@@ -187,12 +187,12 @@ export class DetailDocumentTemplateComponent implements OnInit {
         }
         this.saving = true;
 
-        let metrics: Array<String> = [];
+        const metrics: Array<String> = [];
         this.metrics.forEach((element: any) => {
             metrics.push(element._id);
         });
 
-        let attributes = [];
+        const attributes = [];
         this.attributeDefinitions.forEach(attr => {
             attributes.push({
                 name: attr.name,
@@ -296,7 +296,7 @@ export class DetailDocumentTemplateComponent implements OnInit {
                 this.alias = data.alias;
 
                 // Get map of available metrics
-                let used: Map<String, boolean> = new Map<String, boolean>();
+                const used: Map<String, boolean> = new Map<String, boolean>();
                 // Add known and unknown metrics (keep them, in case of problems)
                 // and drop duplicates
                 (data.metrics || []).forEach((element: any) => {

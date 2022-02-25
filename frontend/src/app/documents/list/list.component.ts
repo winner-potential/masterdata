@@ -34,11 +34,11 @@ export class ListDocumentComponent implements OnInit {
     ngOnInit() {
         this.loading = true;
         this.actionSubscription = this.actions.events.subscribe(action => {
-            if (action == 'add') {
+            if (action === 'add') {
                 this.add();
-            } else if (action == 'close_details') {
+            } else if (action === 'close_details') {
                 this.lastId = undefined;
-            } else if (action == 'saved' || action == 'deleted') {
+            } else if (action === 'saved' || action === 'deleted') {
                 this.getDocuments();
             } else if (action.startsWith('show')) {
                 this.lastId = action.split('#')[1];
@@ -55,7 +55,7 @@ export class ListDocumentComponent implements OnInit {
     }
 
     isSelected(id: String) {
-        return this.lastId == id;
+        return this.lastId === id;
     }
 
     getDocuments() {
@@ -74,7 +74,7 @@ export class ListDocumentComponent implements OnInit {
     }
 
     details(id: String) {
-        if (this.lastId == id) {
+        if (this.lastId === id) {
             this.lastId = undefined;
             this.actions.events.emit('close_details');
         } else {
