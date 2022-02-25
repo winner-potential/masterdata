@@ -316,18 +316,19 @@ export class DetailDocumentComponent implements OnInit {
         };
 
         if (this.id) {
-            this.api.updateDocument(this.id, this.name, this.description, this.template, attributes, metrics, relations, this.parent).subscribe(
-                (data: any) => {
-                    uploadImages(data._id, 'Saved');
-                },
-                error => {
-                    console.error('Error while saving', error);
-                    this.saving = false;
-                    this.snackBar.open('Error while saving', 'Error', {
-                        duration: 2000
-                    });
-                }
-            );
+            this.api.updateDocument(this.id, this.name, this.description, this.template, attributes, metrics, relations, this.parent)
+                .subscribe(
+                    (data: any) => {
+                        uploadImages(data._id, 'Saved');
+                    },
+                    error => {
+                        console.error('Error while saving', error);
+                        this.saving = false;
+                        this.snackBar.open('Error while saving', 'Error', {
+                            duration: 2000
+                        });
+                    }
+                );
         } else {
             this.api.addDocument(this.name, this.description, this.template, attributes, metrics, relations, this.parent).subscribe(
                 (data: any) => {
@@ -403,12 +404,14 @@ export class DetailDocumentComponent implements OnInit {
                         this.metrics.push(m);
                     });
 
-                    const n = (a: any) => this.metricTemplates[a.identifier].alias ? this.metricTemplates[a.identifier].alias : this.metricTemplates[a.identifier].name;
+                    const n = (a: any) => this.metricTemplates[a.identifier].alias ? this.metricTemplates[a.identifier].alias
+                        : this.metricTemplates[a.identifier].name;
 
                     this.metrics.sort((a: any, b: any) => n(a) < n(b) ? 1 : -1);
 
                     (data.relations || []).forEach(metric => {
-                        const m: MetricRelation = new MetricRelation(metric.alias, metric.identifier, metric.link, metric.document, metric._id);
+                        const m: MetricRelation = new MetricRelation(metric.alias, metric.identifier, metric.link, metric.document,
+                                                                     metric._id);
                         this.relations.push(m);
                     });
 

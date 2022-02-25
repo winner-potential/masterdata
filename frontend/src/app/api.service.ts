@@ -33,7 +33,14 @@ export class ApiService {
         return this.httpClient.put(`${this.api}api/v1.0/image/${reference}/${attribute}`, data, {headers: headers});
     }
 
-    updateDocument(id: String, name: String, description: String, template: String, attributes: Array<object>, metrics: Array<object>, relations: Array<object>, parent: String) {
+    updateDocument(id: String,
+                   name: String,
+                   description: String,
+                   template: String,
+                   attributes: Array<object>,
+                   metrics: Array<object>,
+                   relations: Array<object>,
+                   parent: String) {
         return this.httpClient.put(`${this.api}api/v1.0/document/${id}`, {
             _id: id,
             name: name,
@@ -46,7 +53,13 @@ export class ApiService {
         });
     }
 
-    addDocument(name: String, description: String, template: String, attributes: Array<object>, metrics: Array<object>, relations: Array<object>, parent: String) {
+    addDocument(name: String,
+                description: String,
+                template: String,
+                attributes: Array<object>,
+                metrics: Array<object>,
+                relations: Array<object>,
+                parent: String) {
         return this.httpClient.post(`${this.api}api/v1.0/document`, {
             name: name,
             description: description,

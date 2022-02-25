@@ -22,7 +22,12 @@ export class DetailTagTemplateComponent implements OnInit {
     public saving: boolean;
     public loading: boolean;
 
-    constructor(private active: ActivatedRoute, private api: ApiService, private router: Router, private actions: ActionsService, public snackBar: MatSnackBar, private dialog: MatDialog) {}
+    constructor(private active: ActivatedRoute,
+                private api: ApiService,
+                private router: Router,
+                private actions: ActionsService,
+                public snackBar: MatSnackBar,
+                private dialog: MatDialog) {}
 
     ngOnInit() {
         this.active.params.subscribe(value => {

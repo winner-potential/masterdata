@@ -50,7 +50,8 @@ export class ListTagTemplateComponent implements OnInit {
     getTags() {
         this.api.getTagTemplates().subscribe((data: Array<object>) => {
             this.tags = data;
-            this.tags.sort((a: any, b: any) => (a.alias ? a.alias : a.name).toLowerCase() < (b.alias ? b.alias : b.name).toLowerCase() ? -1 : 1);
+            this.tags.sort(
+                (a: any, b: any) => (a.alias ? a.alias : a.name).toLowerCase() < (b.alias ? b.alias : b.name).toLowerCase() ? -1 : 1);
             this.loading = false;
         }, (err) => this.loadError(err));
     }

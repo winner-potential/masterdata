@@ -27,7 +27,12 @@ export class DetailMetricTemplateComponent implements OnInit {
 
     private tagsData: Map<string, any> = new Map<string, any>();
 
-    constructor(private active: ActivatedRoute, private api: ApiService, private router: Router, private actions: ActionsService, public snackBar: MatSnackBar, private dialog: MatDialog) {}
+    constructor(private active: ActivatedRoute,
+                private api: ApiService,
+                private router: Router,
+                private actions: ActionsService,
+                public snackBar: MatSnackBar,
+                private dialog: MatDialog) {}
 
     ngOnInit() {
         this.active.params.subscribe(value => {
@@ -94,7 +99,6 @@ export class DetailMetricTemplateComponent implements OnInit {
             return;
         }
 
-
         const dialogRef = this.dialog.open(ReallyDeleteComponent, {
             width: '350px',
             data: new ReallyDeleteData('Delete Document', 'Do you really want to delete the metric template ' + this.name + '?')
@@ -134,22 +138,23 @@ export class DetailMetricTemplateComponent implements OnInit {
         });
 
         if (this.id) {
-            this.api.updateMetricTemplate(this.id, this.name, this.description, this.unit, tags, this.alias, this.isPublic).subscribe(data => {
-                this.saving = false;
-                this.actions.events.emit('close_details');
-                this.actions.events.emit('saved');
-                this.snackBar.open('Metric Template ' + this.name, 'Updated', {
-                    duration: 2000
+            this.api.updateMetricTemplate(this.id, this.name, this.description, this.unit, tags, this.alias, this.isPublic)
+                .subscribe(data => {
+                    this.saving = false;
+                    this.actions.events.emit('close_details');
+                    this.actions.events.emit('saved');
+                    this.snackBar.open('Metric Template ' + this.name, 'Updated', {
+                        duration: 2000
+                    });
+                    this.router.navigate([{outlets: {primary: ['template-metric-list'], details: null}}]);
+                    this.clear();
+                }, error => {
+                    console.error('Error while saving', error);
+                    this.saving = false;
+                    this.snackBar.open('Error while saving', 'Error', {
+                        duration: 2000
+                    });
                 });
-                this.router.navigate([{outlets: {primary: ['template-metric-list'], details: null}}]);
-                this.clear();
-            }, error => {
-                console.error('Error while saving', error);
-                this.saving = false;
-                this.snackBar.open('Error while saving', 'Error', {
-                    duration: 2000
-                });
-            });
         } else {
             this.api.addMetricTemplate(this.name, this.description, this.unit, tags, this.alias, this.isPublic).subscribe(data => {
                 this.saving = false;

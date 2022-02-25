@@ -51,7 +51,8 @@ export class ListMetricTemplateComponent implements OnInit {
     getMetrics() {
         this.api.getMetricTemplates().subscribe((data: Array<object>) => {
             this.metrics = data;
-            this.metrics.sort((a: any, b: any) => (a.alias ? a.alias : a.name).toLowerCase() < (b.alias ? b.alias : b.name).toLowerCase() ? -1 : 1);
+            this.metrics.sort(
+                (a: any, b: any) => (a.alias ? a.alias : a.name).toLowerCase() < (b.alias ? b.alias : b.name).toLowerCase() ? -1 : 1);
             this.loading = false;
         }, (err) => this.loadError(err));
     }

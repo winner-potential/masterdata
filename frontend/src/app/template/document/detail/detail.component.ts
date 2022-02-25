@@ -34,7 +34,12 @@ export class DetailDocumentTemplateComponent implements OnInit {
 
     private metricsData: Map<string, any> = new Map<string, any>();
 
-    constructor(private active: ActivatedRoute, private api: ApiService, private router: Router, private actions: ActionsService, public snackBar: MatSnackBar, private dialog: MatDialog) {}
+    constructor(private active: ActivatedRoute,
+                private api: ApiService,
+                private router: Router,
+                private actions: ActionsService,
+                public snackBar: MatSnackBar,
+                private dialog: MatDialog) {}
 
     ngOnInit() {
         this.active.params.subscribe(value => {
@@ -203,7 +208,8 @@ export class DetailDocumentTemplateComponent implements OnInit {
 
         if (this.id) {
             this.api
-                .updateDocumentTemplate(this.id, this.name, this.description, metrics, attributes, this.identifier, this.extends, this.alias, this.isPublic)
+                .updateDocumentTemplate(this.id, this.name, this.description, metrics, attributes, this.identifier, this.extends,
+                                        this.alias, this.isPublic)
                 .subscribe(
                     data => {
                         this.saving = false;
@@ -224,25 +230,27 @@ export class DetailDocumentTemplateComponent implements OnInit {
                     }
                 );
         } else {
-            this.api.addDocumentTemplate(this.name, this.description, metrics, attributes, this.identifier, this.extends, this.alias, this.isPublic).subscribe(
-                data => {
-                    this.saving = false;
-                    this.actions.events.emit('close_details');
-                    this.actions.events.emit('saved');
-                    this.snackBar.open('Document Template ' + this.name, 'Saved', {
-                        duration: 2000
-                    });
-                    this.router.navigate([{outlets: {primary: ['template-document-list'], details: null}}]);
-                    this.clear();
-                },
-                error => {
-                    console.error('Error while saving', error);
-                    this.saving = false;
-                    this.snackBar.open('Error while saving', 'Error', {
-                        duration: 2000
-                    });
-                }
-            );
+            this.api.addDocumentTemplate(this.name, this.description, metrics, attributes, this.identifier, this.extends, this.alias,
+                                         this.isPublic)
+                .subscribe(
+                    data => {
+                        this.saving = false;
+                        this.actions.events.emit('close_details');
+                        this.actions.events.emit('saved');
+                        this.snackBar.open('Document Template ' + this.name, 'Saved', {
+                            duration: 2000
+                        });
+                        this.router.navigate([{outlets: {primary: ['template-document-list'], details: null}}]);
+                        this.clear();
+                    },
+                    error => {
+                        console.error('Error while saving', error);
+                        this.saving = false;
+                        this.snackBar.open('Error while saving', 'Error', {
+                            duration: 2000
+                        });
+                    }
+                );
         }
     }
 

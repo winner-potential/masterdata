@@ -22,12 +22,17 @@ export class NavigationComponent {
     public fab: Object;
     public details: boolean;
     @ViewChild('detailsDrawer', {static: true}) detailsDrawer;
-    isNavigation$: Observable<boolean> = this.breakpointObserver.observe([Breakpoints.Large, Breakpoints.XLarge]).pipe(map(result => result.matches));
-    isDetails$: Observable<boolean> = this.breakpointObserver.observe([Breakpoints.Medium, Breakpoints.Large, Breakpoints.XLarge]).pipe(map(result => result.matches));
+    isNavigation$: Observable<boolean> = this.breakpointObserver.observe([Breakpoints.Large, Breakpoints.XLarge])
+        .pipe(map(result => result.matches));
+    isDetails$: Observable<boolean> = this.breakpointObserver.observe([Breakpoints.Medium, Breakpoints.Large, Breakpoints.XLarge])
+        .pipe(map(result => result.matches));
     private path: string;
     private hasDetails: boolean;
 
-    constructor(private breakpointObserver: BreakpointObserver, private router: Router, private actionsService: ActionsService, private auth: AuthentificationService) {}
+    constructor(private breakpointObserver: BreakpointObserver,
+                private router: Router,
+                private actionsService: ActionsService,
+                private auth: AuthentificationService) {}
 
     ngOnInit() {
         let firstRun = true;

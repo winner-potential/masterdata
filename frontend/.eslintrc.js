@@ -28,7 +28,6 @@ module.exports = {
                 "accessibility": "explicit"
             }
         ],
-        "@typescript-eslint/indent": "error",
         "@typescript-eslint/member-delimiter-style": [
             "error",
             {
@@ -90,7 +89,25 @@ module.exports = {
         "id-denylist": "off",
         "id-match": "off",
         "import/no-deprecated": "warn",
-        "indent": "error",
+        "indent": [
+            "error",
+            4,
+            {
+                "VariableDeclarator": "first",
+                "FunctionDeclaration": {
+                    "parameters": "first"
+                },
+                "FunctionExpression": {
+                    "parameters": "first"
+                },
+                "CallExpression": {
+                    "arguments": "first"
+                },
+                "ArrayExpression": "first",
+                "ObjectExpression": "first",
+                "ImportDeclaration": "first"
+            }
+        ],
         "max-len": [
             "error",
             {

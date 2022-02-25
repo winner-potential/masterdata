@@ -44,7 +44,8 @@ export class ListDocumentTemplateComponent implements OnInit {
     getDocuments() {
         this.api.getDocumentTemplates().subscribe((data: Array<object>) => {
             this.documents = data;
-            this.documents.sort((a: any, b: any) => (a.alias ? a.alias : a.name).toLowerCase() < (b.alias ? b.alias : b.name).toLowerCase() ? -1 : 1);
+            this.documents.sort(
+                (a: any, b: any) => (a.alias ? a.alias : a.name).toLowerCase() < (b.alias ? b.alias : b.name).toLowerCase() ? -1 : 1);
             this.loading = false;
         }, (err) => this.loadError(err));
     }
