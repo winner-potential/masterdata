@@ -108,7 +108,7 @@ export class DocumentComponent implements OnInit {
                 if (!handled.has(attr.name)) {
                     const group = sep ? groups.get(sep) : def;
                     handled.add(attr.name);
-                    if (attr.type.toLowerCase() != 'separator' && attr.type.toLowerCase() != 'image') {
+                    if (attr.type.toLowerCase() !== 'separator' && attr.type.toLowerCase() !== 'image') {
                         if (values.has(attr.name)) {
                             group.attributes.push({
                                 name: attr.name,
@@ -117,15 +117,15 @@ export class DocumentComponent implements OnInit {
                             });
                         }
                     }
-                    if (attr.type.toLowerCase() == 'separator') {
+                    if (attr.type.toLowerCase() === 'separator') {
                         groups.set(attr.name, new DocumentAttributeGroup([], attr.name));
                         this.groups.push(groups.get(attr.name));
                     }
-                    if (attr.type.toLowerCase() == 'image') {
+                    if (attr.type.toLowerCase() === 'image') {
                         this.images.push(this.api.getImagePath(document._id, attr.name));
                     }
                 }
-                if (attr.type.toLowerCase() == 'separator') {
+                if (attr.type.toLowerCase() === 'separator') {
                     sep = attr.name;
                 }
             });

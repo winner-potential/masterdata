@@ -69,7 +69,7 @@ const searchDocument = function (api: ApiService, search: string, params: any) {
                 const res: Array<object> = [];
                 data.forEach((d: any) => {
                     if (temps[d.template].public) {
-                        if (!type || d.template == type) {
+                        if (!type || d.template === type) {
                             res.push(d);
                         }
                     }

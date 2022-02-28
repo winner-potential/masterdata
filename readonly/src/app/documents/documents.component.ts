@@ -28,7 +28,7 @@ export class DocumentsComponent implements OnInit {
 
     ngOnInit() {
         this.actionSubscription = this.actions.events.subscribe(action => {
-            if (action == 'close_details') {
+            if (action === 'close_details') {
                 this.lastId = null;
             } else if (action.startsWith('show')) {
                 this.lastId = action.split('#')[1];
@@ -71,7 +71,7 @@ export class DocumentsComponent implements OnInit {
     }
 
     isSelected(id: String) {
-        return this.lastId == id;
+        return this.lastId === id;
     }
 
     import(documents: Array<object>) {
@@ -79,7 +79,7 @@ export class DocumentsComponent implements OnInit {
         documents.forEach((doc: any) => {
             const template: any = this.templates.get(doc.template);
             if (template && template.public) {
-                if (!this.type || this.type == doc.template) {
+                if (!this.type || this.type === doc.template) {
                     this.documents.push(doc);
                 }
             }
@@ -90,7 +90,7 @@ export class DocumentsComponent implements OnInit {
     }
 
     details(id: String) {
-        if (this.lastId == id) {
+        if (this.lastId === id) {
             this.lastId = null;
             this.actions.events.emit('close_details');
         } else {

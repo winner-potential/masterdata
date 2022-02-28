@@ -171,7 +171,7 @@ export class DynamicMetricDataSource {
     }
 
     public empty(): boolean {
-        return !this.dataChange.value || this.dataChange.value.length == 0;
+        return !this.dataChange.value || this.dataChange.value.length === 0;
     }
 }
 

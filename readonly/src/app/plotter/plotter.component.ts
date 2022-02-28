@@ -180,8 +180,8 @@ export class PlotterComponent implements OnInit {
 
         const shift = 0.07;
         const position = shift * (this.yaxisCount - 1);
-        const current = 'yaxis' + (this.yaxisCount != 1 ? this.yaxisCount : '');
-        const short = 'y' + (this.yaxisCount != 1 ? this.yaxisCount : '');
+        const current = 'yaxis' + (this.yaxisCount !== 1 ? this.yaxisCount : '');
+        const short = 'y' + (this.yaxisCount !== 1 ? this.yaxisCount : '');
 
         this.yaxisCount++;
 
@@ -190,7 +190,7 @@ export class PlotterComponent implements OnInit {
             position: position
             // side: side ? "right" : "left"
         };
-        if (current != 'yaxis') {
+        if (current !== 'yaxis') {
             this.graph.layout[current].overlaying = 'y';
         }
         this.yaxis[id] = short;
@@ -205,7 +205,7 @@ export class PlotterComponent implements OnInit {
                 if (value.id) {
                     let found = false;
                     show.forEach(e => {
-                        if (e.id == value.id) {
+                        if (e.id === value.id) {
                             found = true;
                         }
                     });
@@ -226,7 +226,7 @@ export class PlotterComponent implements OnInit {
         const show = this.loadSetting('current');
         const replace = [];
         show.forEach(e => {
-            if (e.id != id) {
+            if (e.id !== id) {
                 replace.push(e);
             }
         });
@@ -278,7 +278,7 @@ export class PlotterComponent implements OnInit {
         const show = this.loadSetting('current');
         show.forEach(e => {
             let req;
-            if (e.type == 'source') {
+            if (e.type === 'source') {
                 req = this.api.queryMetric(e.id, this.start.getTime(), this.end.getTime());
             } else {
                 req = this.api.queryRelation(e.id, this.start.getTime(), this.end.getTime());
