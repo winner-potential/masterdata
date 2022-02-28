@@ -8,6 +8,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 /** Flat node with expandable and level information */
 export class DynamicMetricNode {
+    /* eslint no-use-before-define: 0 */
     constructor(public item: DynamicMetricData, public level = 1, public expandable = false, public isLoading = false) {}
 }
 
@@ -117,7 +118,7 @@ export class DynamicMetricDataSource {
     }
 
     connect(collectionViewer: CollectionViewer): Observable<DynamicMetricNode[]> {
-        this.treeControl.expansionModel.changed!.subscribe(change => {
+        this.treeControl.expansionModel.changed.subscribe(change => {
             if ((change as SelectionChange<DynamicMetricNode>).added || (change as SelectionChange<DynamicMetricNode>).removed) {
                 this.handleTreeControl(change as SelectionChange<DynamicMetricNode>);
             }
@@ -181,8 +182,7 @@ export class DynamicMetricDataSource {
     styleUrls: ['./tree.component.css']
 })
 export class TreeComponent implements OnInit {
-    @Output('selected')
-    public clickEvent = new EventEmitter<any>();
+    @Output() public clickEvent = new EventEmitter<any>();
     treeControl: FlatTreeControl<DynamicMetricNode>;
     dataSource: DynamicMetricDataSource;
     @Input() private document: BehaviorSubject<any>;
@@ -205,12 +205,12 @@ export class TreeComponent implements OnInit {
         );
         this.treeControl = new FlatTreeControl<DynamicMetricNode>(this.getLevel, this.isExpandable);
         this.dataSource = new DynamicMetricDataSource(this.treeControl, database);
-        this.api.getDocumentTemplates().subscribe((templates: Array<any>) => {
-            (templates || []).forEach(t => {
+        this.api.getDocumentTemplates().subscribe((dTemplates: Array<any>) => {
+            dTemplates?.forEach(t => {
                 documentMapping[t._id] = t;
             });
-            this.api.getMetricTemplates().subscribe((templates: Array<any>) => {
-                (templates || []).forEach(t => {
+            this.api.getMetricTemplates().subscribe((mTemplates: Array<any>) => {
+                mTemplates?.forEach(t => {
                     metricMapping[t._id] = t;
                 });
                 this.document.subscribe(newDocument => {

@@ -11,6 +11,7 @@ export class TokenInterceptor implements HttpInterceptor {
     intercept(req: HttpRequest<any>, next: HttpHandler) {
         req = req.clone({
             setHeaders: {
+                /* eslint-disable @typescript-eslint/naming-convention */
                 'X-Access-Token': this.auth.token
             }
         });

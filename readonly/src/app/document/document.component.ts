@@ -62,7 +62,6 @@ export class DocumentComponent implements OnInit {
     }
 
     handleMetricClick(node) {
-        console.log(node);
         this.router.navigate([{outlets: {primary: ['add-to-plotter', node.type, node._id], details: null}}]);
     }
 
@@ -82,7 +81,6 @@ export class DocumentComponent implements OnInit {
     }
 
     goTo(id) {
-        console.log(id);
         this.router.navigate([{outlets: {details: ['document-show', id]}}]);
     }
 

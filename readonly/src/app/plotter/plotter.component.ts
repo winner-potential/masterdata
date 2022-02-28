@@ -11,6 +11,7 @@ function djb2(str) {
 }
 
 function hashStringToColor(str) {
+    /* eslint no-bitwise: 0 */
     const hash = djb2(str);
     const r = (hash & 0xff0000) >> 16;
     const g = (hash & 0x00ff00) >> 8;
@@ -25,6 +26,7 @@ function hashStringToColor(str) {
 })
 export class PlotterComponent implements OnInit {
     public graph = {
+        /* eslint-disable @typescript-eslint/naming-convention */
         data: [],
         layout: {margin: {t: 25}, xaxis: {nticks: 5}, paper_bgcolor: '#fafafa', plot_bgcolor: '#fafafa'}
     };
@@ -297,8 +299,8 @@ export class PlotterComponent implements OnInit {
                 const information = data.metric || data.relation;
                 const x = [];
                 const y = [];
-                (data.values as Array<Array<number>>).forEach(e => {
-                    const d = new Date(e[0]);
+                (data.values as Array<Array<number>>).forEach(el => {
+                    const d = new Date(el[0]);
                     const datestring =
                         ('0' + d.getDate()).slice(-2) +
                         '-' +
@@ -313,7 +315,7 @@ export class PlotterComponent implements OnInit {
                         ('0' + d.getSeconds()).slice(-2);
 
                     x.push(d);
-                    y.push(e[1]);
+                    y.push(el[1]);
                 });
                 const plot = {
                     x: x,

@@ -11,4 +11,4 @@ if (environment.production) {
 platformBrowserDynamic().bootstrapModule(AppModule).then((_appRef) => {
     (window as any).appRef = _appRef;
 })
-    .catch(err => console.log(err));
+    .catch(err => console.error(err));
