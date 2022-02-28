@@ -1,28 +1,26 @@
-import { Component, OnInit, Input } from "@angular/core";
-import { Tag } from "../../../model/tag";
+import { Component, Input, OnInit } from '@angular/core';
+import { Tag } from '../../../model/tag';
 
 @Component({
-  selector: "document-metric-tag",
-  templateUrl: "./tag.component.html",
-  styleUrls: ["./tag.component.css"]
+    selector: 'document-metric-tag',
+    templateUrl: './tag.component.html',
+    styleUrls: ['./tag.component.css']
 })
 export class TagComponent implements OnInit {
-  @Input("tag") private tag: Tag;
+    @Input('tag-name') public name: String;
+    @Input('tag-default-value') public defaultValue: String;
+    @Input() private tag: Tag;
 
-  @Input("tag-name") public name: String;
+    constructor() {}
 
-  @Input("tag-default-value") public defaultValue: String;
+    get value(): String {
+        return this.tag ? this.tag.value : '';
+    }
 
-  constructor() {}
+    set value(val: String) {
+        this.tag.value = val;
+    }
 
-  ngOnInit() {
-  }
-
-  set value(val: String) {
-    this.tag.value = val;
-  }
-
-  get value(): String {
-    return this.tag ? this.tag.value : "";
-  }
+    ngOnInit() {
+    }
 }

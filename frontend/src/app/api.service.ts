@@ -1,189 +1,203 @@
-import { Injectable } from "@angular/core";
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
-import { environment } from "../environments/environment";
+import { environment } from '../environments/environment';
 
 @Injectable({
-  providedIn: "root"
+    providedIn: 'root'
 })
 export class ApiService {
-  api = (window as any).api || environment.api;
+    api = (window as any).api || environment.api;
 
-  constructor(private httpClient: HttpClient) {}
+    constructor(private httpClient: HttpClient) {}
 
-  findDocuments(search: String) {
-    return this.httpClient.get(`${this.api}api/v1.0/document/find/${search}`);
-  }
+    findDocuments(search: String) {
+        return this.httpClient.get(`${this.api}api/v1.0/document/find/${search}`);
+    }
 
-  findDocumentWithMetricTemplate(metric: String, search: String) {
-    return this.httpClient.get(`${this.api}api/v1.0/document/find-with-metric-template/${metric}/${search}`);
-  }
+    findDocumentWithMetricTemplate(metric: String, search: String) {
+        return this.httpClient.get(`${this.api}api/v1.0/document/find-with-metric-template/${metric}/${search}`);
+    }
 
-  getDocuments() {
-    return this.httpClient.get(`${this.api}api/v1.0/document`);
-  }
-  getDocument(id: String) {
-    return this.httpClient.get(`${this.api}api/v1.0/document/${id}`);
-  }
+    getDocuments() {
+        return this.httpClient.get(`${this.api}api/v1.0/document`);
+    }
 
-  uploadImage(reference: String, attribute: String, data: String) {
-    let headers = new HttpHeaders();
-    headers = headers.set('Content-Type', 'application/octet-stream');
-    return this.httpClient.put(`${this.api}api/v1.0/image/${reference}/${attribute}`, data, {headers: headers});
-  }
+    getDocument(id: String) {
+        return this.httpClient.get(`${this.api}api/v1.0/document/${id}`);
+    }
 
-  updateDocument(id: String, name: String, description: String, template: String, attributes: Array<object>, metrics: Array<object>, relations: Array<object>, parent: String) {
-    return this.httpClient.put(`${this.api}api/v1.0/document/${id}`, {
-      _id: id,
-      name: name,
-      description: description,
-      parent: parent || null,
-      template: template,
-      attributes: attributes,
-      metrics: metrics,
-      relations: relations
-    });
-  }
+    uploadImage(reference: String, attribute: String, data: String) {
+        let headers = new HttpHeaders();
+        headers = headers.set('Content-Type', 'application/octet-stream');
+        return this.httpClient.put(`${this.api}api/v1.0/image/${reference}/${attribute}`, data, {headers: headers});
+    }
 
-  addDocument(name: String, description: String, template: String, attributes: Array<object>, metrics: Array<object>, relations: Array<object>, parent: String) {
-    return this.httpClient.post(`${this.api}api/v1.0/document`, {
-      name: name,
-      description: description,
-      parent: parent || null,
-      template: template,
-      attributes: attributes,
-      metrics: metrics,
-      relations: relations
-    });
-  }
+    updateDocument(id: String,
+                   name: String,
+                   description: String,
+                   template: String,
+                   attributes: Array<object>,
+                   metrics: Array<object>,
+                   relations: Array<object>,
+                   parent: String) {
+        return this.httpClient.put(`${this.api}api/v1.0/document/${id}`, {
+            _id: id,
+            name: name,
+            description: description,
+            parent: parent || null,
+            template: template,
+            attributes: attributes,
+            metrics: metrics,
+            relations: relations
+        });
+    }
 
-  deleteDocument(id: String) {
-    return this.httpClient.delete(`${this.api}api/v1.0/document/${id}`);
-  }
+    addDocument(name: String,
+                description: String,
+                template: String,
+                attributes: Array<object>,
+                metrics: Array<object>,
+                relations: Array<object>,
+                parent: String) {
+        return this.httpClient.post(`${this.api}api/v1.0/document`, {
+            name: name,
+            description: description,
+            parent: parent || null,
+            template: template,
+            attributes: attributes,
+            metrics: metrics,
+            relations: relations
+        });
+    }
 
-  getTagTemplates() {
-    return this.httpClient.get(`${this.api}api/v1.0/template/tag`);
-  }
+    deleteDocument(id: String) {
+        return this.httpClient.delete(`${this.api}api/v1.0/document/${id}`);
+    }
 
-  getTagTemplate(id: String) {
-    return this.httpClient.get(`${this.api}api/v1.0/template/tag/${id}`);
-  }
+    getTagTemplates() {
+        return this.httpClient.get(`${this.api}api/v1.0/template/tag`);
+    }
 
-  updateTagTemplate(id: String, name: String, description: String, value: String, alias: String, pub: Boolean) {
-    return this.httpClient.put(`${this.api}api/v1.0/template/tag/${id}`, {
-      _id: id,
-      name: name,
-      description: description,
-      value: value,
-      alias: alias,
-      public: pub
-    });
-  }
+    getTagTemplate(id: String) {
+        return this.httpClient.get(`${this.api}api/v1.0/template/tag/${id}`);
+    }
 
-  addTagTemplate(name: String, description: String, value: String, alias: String, pub: Boolean) {
-    return this.httpClient.post(`${this.api}api/v1.0/template/tag`, {
-      name: name,
-      description: description,
-      value: value,
-      alias: alias,
-      public: pub
-    });
-  }
+    updateTagTemplate(id: String, name: String, description: String, value: String, alias: String, pub: Boolean) {
+        return this.httpClient.put(`${this.api}api/v1.0/template/tag/${id}`, {
+            _id: id,
+            name: name,
+            description: description,
+            value: value,
+            alias: alias,
+            public: pub
+        });
+    }
 
-  deleteTagTemplate(id: String) {
-    return this.httpClient.delete(`${this.api}api/v1.0/template/tag/${id}`);
-  }
+    addTagTemplate(name: String, description: String, value: String, alias: String, pub: Boolean) {
+        return this.httpClient.post(`${this.api}api/v1.0/template/tag`, {
+            name: name,
+            description: description,
+            value: value,
+            alias: alias,
+            public: pub
+        });
+    }
 
-  getMetricTemplates() {
-    return this.httpClient.get(`${this.api}api/v1.0/template/metric`);
-  }
+    deleteTagTemplate(id: String) {
+        return this.httpClient.delete(`${this.api}api/v1.0/template/tag/${id}`);
+    }
 
-  getMetricTemplate(id: String) {
-    return this.httpClient.get(`${this.api}api/v1.0/template/metric/${id}`);
-  }
+    getMetricTemplates() {
+        return this.httpClient.get(`${this.api}api/v1.0/template/metric`);
+    }
 
-  updateMetricTemplate(id: String, name: String, description: String, unit: String, tags: Array<String>, alias: String, pub: Boolean) {
-    return this.httpClient.put(`${this.api}api/v1.0/template/metric/${id}`, {
-      _id: id,
-      name: name,
-      description: description,
-      unit: unit,
-      tags: tags,
-      alias: alias,
-      public: pub
-    });
-  }
+    getMetricTemplate(id: String) {
+        return this.httpClient.get(`${this.api}api/v1.0/template/metric/${id}`);
+    }
 
-  addMetricTemplate(name: String, description: String, unit: String, tags: Array<String>, alias: String, pub: Boolean) {
-    return this.httpClient.post(`${this.api}api/v1.0/template/metric`, {
-      name: name,
-      description: description,
-      unit: unit,
-      tags: tags,
-      alias: alias,
-      public: pub
-    });
-  }
+    updateMetricTemplate(id: String, name: String, description: String, unit: String, tags: Array<String>, alias: String, pub: Boolean) {
+        return this.httpClient.put(`${this.api}api/v1.0/template/metric/${id}`, {
+            _id: id,
+            name: name,
+            description: description,
+            unit: unit,
+            tags: tags,
+            alias: alias,
+            public: pub
+        });
+    }
 
-  deleteMetricTemplate(id: String) {
-    return this.httpClient.delete(`${this.api}api/v1.0/template/metric/${id}`);
-  }
+    addMetricTemplate(name: String, description: String, unit: String, tags: Array<String>, alias: String, pub: Boolean) {
+        return this.httpClient.post(`${this.api}api/v1.0/template/metric`, {
+            name: name,
+            description: description,
+            unit: unit,
+            tags: tags,
+            alias: alias,
+            public: pub
+        });
+    }
 
-  getDocumentTemplates() {
-    return this.httpClient.get(`${this.api}api/v1.0/template/document`);
-  }
+    deleteMetricTemplate(id: String) {
+        return this.httpClient.delete(`${this.api}api/v1.0/template/metric/${id}`);
+    }
 
-  getDocumentTemplate(id: String) {
-    return this.httpClient.get(`${this.api}api/v1.0/template/document/${id}`);
-  }
+    getDocumentTemplates() {
+        return this.httpClient.get(`${this.api}api/v1.0/template/document`);
+    }
 
-  updateDocumentTemplate(
-    id: String,
-    name: String,
-    description: String,
-    metrics: Array<String>,
-    attributes: Array<object>,
-    identifier: String,
-    ext: String,
-    alias: String,
-    pub: boolean
-  ) {
-    return this.httpClient.put(`${this.api}api/v1.0/template/document/${id}`, {
-      _id: id,
-      name: name,
-      description: description,
-      metrics: metrics,
-      extends: ext || null,
-      attributes: attributes,
-      identifier: identifier,
-      alias: alias,
-      public: pub
-    });
-  }
+    getDocumentTemplate(id: String) {
+        return this.httpClient.get(`${this.api}api/v1.0/template/document/${id}`);
+    }
 
-  addDocumentTemplate(
-    name: String,
-    description: String,
-    metrics: Array<String>,
-    attributes: Array<object>,
-    identifier: String,
-    ext: String,
-    alias: String,
-    pub: boolean
-  ) {
-    return this.httpClient.post(`${this.api}api/v1.0/template/document`, {
-      name: name,
-      description: description,
-      metrics: metrics,
-      extends: ext || null,
-      attributes: attributes,
-      identifier: identifier,
-      alias: alias,
-      public: pub
-    });
-  }
+    updateDocumentTemplate(
+        id: String,
+        name: String,
+        description: String,
+        metrics: Array<String>,
+        attributes: Array<object>,
+        identifier: String,
+        ext: String,
+        alias: String,
+        pub: boolean
+    ) {
+        return this.httpClient.put(`${this.api}api/v1.0/template/document/${id}`, {
+            _id: id,
+            name: name,
+            description: description,
+            metrics: metrics,
+            extends: ext || null,
+            attributes: attributes,
+            identifier: identifier,
+            alias: alias,
+            public: pub
+        });
+    }
 
-  deleteDocumentTemplate(id: String) {
-    return this.httpClient.delete(`${this.api}api/v1.0/template/document/${id}`);
-  }
+    addDocumentTemplate(
+        name: String,
+        description: String,
+        metrics: Array<String>,
+        attributes: Array<object>,
+        identifier: String,
+        ext: String,
+        alias: String,
+        pub: boolean
+    ) {
+        return this.httpClient.post(`${this.api}api/v1.0/template/document`, {
+            name: name,
+            description: description,
+            metrics: metrics,
+            extends: ext || null,
+            attributes: attributes,
+            identifier: identifier,
+            alias: alias,
+            public: pub
+        });
+    }
+
+    deleteDocumentTemplate(id: String) {
+        return this.httpClient.delete(`${this.api}api/v1.0/template/document/${id}`);
+    }
 }
