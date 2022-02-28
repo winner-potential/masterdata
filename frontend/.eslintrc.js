@@ -63,7 +63,6 @@ module.exports = {
             }
         ],
         "@typescript-eslint/no-unused-expressions": "error",
-        "@typescript-eslint/no-use-before-define": "error",
         "@typescript-eslint/prefer-function-type": "error",
         "@typescript-eslint/quotes": [
             "error",
