@@ -9,7 +9,10 @@ import { LayoutModule } from '@angular/cdk/layout';
 
 import { RouterModule, Routes } from '@angular/router';
 
+import { CommonModule } from '@angular/common';
+import * as PlotlyJS from 'plotly.js-dist-min';
 import { PlotlyModule } from 'angular-plotly.js';
+PlotlyModule.plotlyjs = PlotlyJS;
 
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatBadgeModule } from '@angular/material/badge';
@@ -213,6 +216,7 @@ const appRoutes: Routes = [
         MatTooltipModule,
         MatTreeModule,
         HttpClientModule,
+        CommonModule,
         PlotlyModule,
         RouterModule.forRoot(appRoutes)
     ],
