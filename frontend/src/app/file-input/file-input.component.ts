@@ -1,36 +1,36 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
-  selector: 'masterdata-file-input',
-  templateUrl: './file-input.component.html',
-  styleUrls: ['./file-input.component.css']
+    selector: 'masterdata-file-input',
+    templateUrl: './file-input.component.html',
+    styleUrls: ['./file-input.component.css']
 })
 export class FileInputComponent implements OnInit {
 
-  @Input('value')
-  public filename: String;
+    @Input('value')
+    public filename: String;
 
-  @Input('placeholder')
-  public placeholder : String;
+    @Input()
+    public placeholder: String;
 
-  @Input('accept')
-  public accept : String;
+    @Input()
+    public accept: String;
 
-  @Output('changed') 
-  public changedEvent = new EventEmitter<any>(); 
+    @Output('changed')
+    public changedEvent = new EventEmitter<any>();
 
-  constructor() { }
+    constructor() { }
 
-  ngOnInit() {
-  }
-
-  handleUpload(files: FileList) {
-    var path = [];
-    for(var k = 0; k < files.length; k ++) {
-      path.push(files.item(k).name);
+    ngOnInit() {
     }
-    this.filename = path.join(', ');
-    this.changedEvent.emit(files);
-  }
+
+    handleUpload(files: FileList) {
+        const path = [];
+        for (let k = 0; k < files.length; k++) {
+            path.push(files.item(k).name);
+        }
+        this.filename = path.join(', ');
+        this.changedEvent.emit(files);
+    }
 
 }

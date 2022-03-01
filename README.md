@@ -16,7 +16,7 @@ If this is not available for testing purposes, the profile `dev` can be activate
 Use the following commands to start the MongoDB and Masterdata instance:
 
 ```bash
-docker run -v /data/db --name mongodb mongo:3.6.5-jessie
+docker run -v /data/db --name mongodb mongo:5.0.6-focal
 docker run -p 3000:3000 -v /var/lib/app/img --link mongodb -e DATABASE=mongodb://mongodb/masterdata -e BASEPATH=http://localhost:3000/ -e PROFILE=dev masterdatamgmt/full:latest
 ```
 
@@ -29,7 +29,7 @@ version: "3"
 
 services:
   db: 
-    image: mongo:3.6.5-jessie
+    image: mongo:5.0.6-focal
     volumes:
       - 'data:/data/db'
   backend:

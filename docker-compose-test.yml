@@ -2,7 +2,7 @@ version: "3"
 
 services:
   db: 
-    image: mongo:3.6.5-jessie
+    image: mongo:5.0.6-focal
     ports:
       - 27017:27017
   backend:

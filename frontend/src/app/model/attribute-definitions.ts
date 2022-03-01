@@ -1,57 +1,57 @@
-import { AttributeDefinition } from "./attribute-definition";
+import { AttributeDefinition } from './attribute-definition';
 
 class AttributeDefinitionIterator implements Iterator<AttributeDefinition> {
-  private pointer = 0;
+    private pointer = 0;
 
-  constructor(public definitions: AttributeDefinition[]) {}
+    constructor(public definitions: AttributeDefinition[]) {}
 
-  public next(): IteratorResult<AttributeDefinition> {
-    if (this.pointer < this.definitions.length) {
-      return {
-        done: false,
-        value: this.definitions[this.pointer++]
-      };
-    } else {
-      return {
-        done: true,
-        value: null
-      };
+    public next(): IteratorResult<AttributeDefinition> {
+        if (this.pointer < this.definitions.length) {
+            return {
+                done: false,
+                value: this.definitions[this.pointer++]
+            };
+        } else {
+            return {
+                done: true,
+                value: null
+            };
+        }
     }
-  }
 }
 
 export class AttributeDefinitions implements Iterable<AttributeDefinition> {
-  public definitions: Array<AttributeDefinition> = [];
+    public definitions: Array<AttributeDefinition> = [];
 
-  public add(value: AttributeDefinition) {
-    this.definitions.push(value);
-    value.parent = this;
-    return value;
-  }
+    get length(): number {
+        return this.definitions.length;
+    }
 
-  [Symbol.iterator](): Iterator<AttributeDefinition> {
-    return new AttributeDefinitionIterator(this.definitions);
-  }
+    public add(value: AttributeDefinition) {
+        this.definitions.push(value);
+        value.parent = this;
+        return value;
+    }
 
-  public forEach(fn: (value: AttributeDefinition) => any) {
-    this.definitions.forEach(fn);
-  }
+    [Symbol.iterator](): Iterator<AttributeDefinition> {
+        return new AttributeDefinitionIterator(this.definitions);
+    }
 
-  public get(index: number) {
-    return this.definitions[index];
-  }
+    public forEach(fn: (value: AttributeDefinition) => any) {
+        this.definitions.forEach(fn);
+    }
 
-  public remove(index: number) {
-    var current = this.definitions[index];
-    this.definitions.splice(index, 1);
-    return current;
-  }
+    public get(index: number) {
+        return this.definitions[index];
+    }
 
-  get length(): number {
-      return this.definitions.length;
-  }
+    public remove(index: number) {
+        const current = this.definitions[index];
+        this.definitions.splice(index, 1);
+        return current;
+    }
 
-  public clear() {
-      this.definitions.length = 0;
-  }
+    public clear() {
+        this.definitions.length = 0;
+    }
 }

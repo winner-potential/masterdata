@@ -47,7 +47,8 @@
         </mat-select>
         <mat-error *ngIf="!name">{{getIdentifierError()}}</mat-error>
       </mat-form-field>
-      <div class="attributes" [sortablejs]="attributeDefinitions.definitions">
+<!--      <div class="attributes" [sortablejs]="attributeDefinitions.definitions">-->
+      <div class="attributes">
         <div class="attribute" *ngFor="let attribute of attributeDefinitions; let index = index">
           <document-attribute-type [attribute]="attribute" [needed]="true" icon="close" (change)="changeAttribute($event, index)" (action)="removeAttribute(index)"></document-attribute-type>
         </div>
