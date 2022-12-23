@@ -16,7 +16,7 @@
     "debug": "^3.1.0",
     "express": "^4.16.3",
     "image-type": "^3.0.0",
-    "jsonwebtoken": "^8.3.0",
+    "jsonwebtoken": "^9.0.0",
     "ldapjs": "^1.0.2",
     "mongoose": "^5.7.6",
     "morgan": "^1.9.1",
